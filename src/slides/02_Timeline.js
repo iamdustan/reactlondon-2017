@@ -110,11 +110,14 @@ export default class TimelineSlide extends Component {
         return true;
       }
     } else if (dir === 'LEFT') {
+      return false;
+      /*
       const diff = -1;
       if (this.state.step + diff > -1) {
         this.setState({step: this.state.step + diff})
         return true;
       }
+      */
     }
     return false;
   };

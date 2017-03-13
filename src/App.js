@@ -7,10 +7,10 @@ import Webflow from './resources/webflow.svg';
 
 const Branded = () => (
   <div style={Branded.style}>
-    <Webflow height={36} width={'auto'}/>
+    <Webflow height={36}/>
   </div>
 );
-Branded.style = {color: '#fff', position: 'fixed', top: '1.5em', right: '1.5em', opacity: 0.6, zIndex: 100};
+Branded.style = {color: '#fff', position: 'fixed', top: '1.5em', right: '1.5em', opacity: 0.4, zIndex: 100};
 
 const LEFT = 37;
 const RIGHT = 39;
@@ -26,14 +26,20 @@ class App extends Component {
     height: -1,
   };
 
+  setDims = () => {
+    // 15 for scrollbar width
+    const width = document.documentElement.clientWidth - WIDTH_OFFSET; // || window.innerWidth || 0;
+    const height = document.documentElement.clientHeight - WIDTH_OFFSET; // || window.innerHeight || 0;
+    this.setState({ready: true, width, height});
+  };
+
   componentDidMount() {
     // just giving the JS engine some time to flush
     setTimeout(() => {
-      // 15 for scrollbar width
-      const width = document.documentElement.clientWidth - WIDTH_OFFSET; // || window.innerWidth || 0;
-      const height = document.documentElement.clientHeight - WIDTH_OFFSET; // || window.innerHeight || 0;
-      this.setState({ready: true, width, height, slide: 0});
+      this.setState({slide: 0});
+      this.setDims();
     }, 1000);
+    window.addEventListener('resize', this.setDims)
     document.addEventListener('keyup', this.handleKeyPress, false);
   }
 
