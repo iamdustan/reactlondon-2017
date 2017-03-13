@@ -13,7 +13,10 @@ const Branded = () => (
 Branded.style = {color: '#fff', position: 'fixed', top: '1.5em', right: '1.5em', opacity: 0.4, zIndex: 100};
 
 const LEFT = 37;
+const PAGEUP = 33;
+
 const RIGHT = 39;
+const PAGEDOWN = 34;
 // const UP = 38;
 // const DOWN = 40;
 const WIDTH_OFFSET = 0; // 15;
@@ -49,10 +52,12 @@ class App extends Component {
 
   handleKeyPress = (event) => {
     switch (event.which) {
+      case PAGEUP:
       case LEFT:
         if (this.slide && this.slide.onStep && this.slide.onStep('LEFT')) return;
         if (this.state.slide < 1) return;
         return this.setState({slide: this.state.slide - 1});
+      case PAGEDOWN:
       case RIGHT:
         if (this.slide && this.slide.onStep && this.slide.onStep('RIGHT')) return;
         if (this.state.slide >= slides.length - 1) return;
