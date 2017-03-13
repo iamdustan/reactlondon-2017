@@ -80,18 +80,18 @@ export default class Timeline extends React.Component {
         const totalFramesForWaypoint = Math.ceil(line.duration / this.props.FRAME) * 2;
         if (frame > startFrame + totalFramesForWaypoint) {
           ctx.save();
-          ctx.shadowBlur = 3;
+          ctx.shadowBlur = 5;
           ctx.shadowColor = '#000000';
           ctx.font = line.font || '24px sans-serif';
           ctx.fillStyle = line.fill || '#fff';
           ctx.translate(waypoint[i - 1][0], waypoint[i - 1][1]);
           if (line.rotate === 'clockwise') {
             ctx.rotate(angle(line.end, line.start));
-            ctx.fillText(line.label, 0, -4);
+            ctx.fillText(line.label, 0, -8);
           } else {
             ctx.rotate(angle(line.start, line.end));
             const tm = ctx.measureText(line.label);
-            ctx.fillText(line.label, -tm.width, -4);
+            ctx.fillText(line.label, -tm.width, -8);
           }
           ctx.restore();
         }

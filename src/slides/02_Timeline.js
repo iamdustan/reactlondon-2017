@@ -6,11 +6,11 @@ import {
 } from '../data';
 
 import Canvas from '../canvas/canvas';
-// import Starfield from '../canvas/starfield';
+import Starfield from '../canvas/starfield';
 import Timeline from '../canvas/timeline';
 
 const INITIAL_FRAME_COUNT = 100;
-const ARM = 400;
+const ARM = 500;
 const calcPercentage = (target, lhs, rhs) => Math.abs(1 - ((target - rhs) * 100) / (lhs - rhs) / 100);
 const leftBound = new Date('Jan 1, 2013');
 const rightBound = new Date();
@@ -20,6 +20,7 @@ const toLine = (w, h, entry) => {
   const x = Math.round(w * leftPercentage);
   const y = Math.round(h * 0.8);
   return {
+    font: '36px menlo',
     percentage: leftPercentage,
     start: [x, y],
     end: [x - ARM / 4, y - ARM],
@@ -36,7 +37,7 @@ const toTick = (w, h, date) => {
   const x = Math.round(w * leftPercentage);
   const y = Math.round(h * 0.8);
   return {
-    font: '18px sans-serif',
+    font: '20px menlo',
     percentage: leftPercentage,
     start: [x, y],
     end: [x, y + 80],
@@ -60,7 +61,7 @@ const extendArm = (point, amount) => [point[0] - amount, point[1] - amount * 4];
 
 export default class TimelineSlide extends Component {
   currentStep = 0;
-  steps = 3;
+  steps = [0, 300, 370];
 
   componentWillMount() {
     const {height, width} = this.props;
@@ -68,9 +69,9 @@ export default class TimelineSlide extends Component {
     const mapTick = t => toTick(width, height, t);
     const toCommunity = t => ({
       ...t,
-      end: t.label === 'ReactGibbon' ? extendArm(t.end, 54)
-         : t.label === 'ReactWorkerDOM' ? extendArm(t.end, 54)
-         : t.label === 'ReactTitanium' ? extendArm(t.end, 54)
+      end: t.label === 'ReactGibbon' ? extendArm(t.end, 80)
+         : t.label === 'ReactWorkerDOM' ? extendArm(t.end, 80)
+         : t.label === 'ReactTitanium' ? extendArm(t.end, 80)
          : t.end,
       delay: Math.round(
         (INITIAL_FRAME_COUNT * 3 * Canvas.FRAME) +
@@ -101,33 +102,31 @@ export default class TimelineSlide extends Component {
     console.log('onStep', dir);
     if (dir === 'RIGHT') {
       const diff = +1;
-      if (this.currentStep + diff < this.steps) {
+      if (this.currentStep + diff < this.steps.length) {
         this.currentStep++;
-        this.player.onNext();
-        this.player.onNext();
+        this.player.onJump(this.steps[this.currentStep] + 2);
         this.player.onPlay();
-        console.log('onStep');
         return true;
       }
     } else if (dir === 'LEFT') {
-      return false;
-      /*
-      const diff = -1;
-      if (this.state.step + diff > -1) {
-        this.setState({step: this.state.step + diff})
-        return true;
+      if (this.currentStep === 0) {
+        return false;
       }
-      */
+
+      this.currentStep = Math.max(0, this.currentStep - 1);
+      this.player.onJump(this.steps[this.currentStep] + 2);
+      this.player.onPlay();
+      return true;
     }
     return false;
   };
 
   onFrame = (frame, state) => {
     if (state === 'PLAYING') {
-      if (frame === 300) {
-        requestAnimationFrame(this.player.onStop);
-      }
-      if (frame === 370) {
+      if (
+        frame === this.steps[1] ||
+        frame === this.steps[2]
+      ) {
         requestAnimationFrame(this.player.onStop);
       }
     }
@@ -147,13 +146,12 @@ export default class TimelineSlide extends Component {
         onFrame={this.onFrame}
         ref={this.refSetter}
       >
-      {/*
         <Starfield
           FRAME={Canvas.FRAME}
+          particles={300}
           width={this.w}
           height={this.h}
         />
-      */}
         <Timeline
           FRAME={Canvas.FRAME}
           width={width}

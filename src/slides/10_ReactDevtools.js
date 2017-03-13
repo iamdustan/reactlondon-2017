@@ -7,6 +7,7 @@ import {Motion, spring} from 'react-motion';
 
 import {Title} from '../components';
 import Multislide from '../components/multislide';
+import HardwareImpl from '../resources/react-hardware-code.png';
 import HardwareDevtools from '../resources/react-hardware-devtools.gif';
 import BlessedDevtools from '../resources/react-blessed-devtools.gif';
 
@@ -22,7 +23,7 @@ const s = {
 const Steps = [
   // 1
   () => [
-    <Title.Centered>
+    <Title.Centered style={{width: '55%'}}>
       <div style={{fontSize: 42, padding: '0.2em'}}>{' '}</div>
       React Devtools
     </Title.Centered>
@@ -36,6 +37,7 @@ const Steps = [
       style={{opacity: spring(1, {stiffness: 5, damping: 5}), position: 'absolute', top: '20%', width: '100%', textAlign: 'center'}}>
       {interpolatingStyle => (
         <div style={{...interpolatingStyle}}>
+          <img src={HardwareImpl} alt="React Hardware Code" height="409" />
           <img src={HardwareDevtools} alt="React Devtools on Hardware" />
         </div>
       )}

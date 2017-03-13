@@ -46,7 +46,7 @@ function initialize(text) {
 `;
 
 const style = {
-  fontSize: 24,
+  fontSize: 36,
   fontWeight: 300,
   padding: '2.5% 15%',
   position: 'absolute',

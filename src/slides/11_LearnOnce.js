@@ -12,7 +12,7 @@ export default () => (
   <FullScreen background={"black"}>
     <Fade>
       <FullScreen background={colors.purple}>
-        <Title.Centered>Learn Once<br />Write Anywhere</Title.Centered>
+        <Title.Centered style={{width: '80%'}}>Learn Once<br />Write Anywhere</Title.Centered>
       </FullScreen>
     </Fade>
   </FullScreen>

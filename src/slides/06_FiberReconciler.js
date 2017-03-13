@@ -49,7 +49,7 @@ const steps = [
     <FullScreen background={colors.purple}>
       <Centered>
         <Motion defaultStyle={{opacity: 0}} style={{opacity: spring(1, {stiffness: 5, damping: 5})}}>
-          {interpolatingStyle => <Title style={interpolatingStyle}>{TITLE}</Title>}
+          {interpolatingStyle => <Title style={{...interpolatingStyle, fontSize: 126}}>{TITLE}</Title>}
         </Motion>
       </Centered>
     </FullScreen>
@@ -57,7 +57,7 @@ const steps = [
 
   // step 2
   ({onRest}) => (
-    <Motion defaultStyle={{top: 50, fontSize: 144, bubbleScale: 0}} style={{
+    <Motion defaultStyle={{top: 50, fontSize: 126, bubbleScale: 0}} style={{
       top: spring(15, {stiffness: 100, damping: 10}),
       fontSize: spring(72, {stiffness: 100, damping: 10}),
       bubbleScale: spring(1, {stiffness: 100, damping: 10}),

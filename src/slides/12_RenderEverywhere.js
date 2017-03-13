@@ -4,6 +4,6 @@ import {
 } from '../components';
 
 export default () => (
-  <Title.Centered>React Anywhere<br />Render Everywhere</Title.Centered>
+  <Title.Centered style={{width: '80%'}}>React Anywhere<br />Render Everywhere</Title.Centered>
 );
 

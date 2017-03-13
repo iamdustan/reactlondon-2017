@@ -8,13 +8,12 @@ const Background = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  top: -1%;
+  left: -1%;
+  background-color: ${props => props.backgroundColor || 'inherit'}
   background-image: url(${props => props.src});
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-blend-mode: color-burn;
-  background-color: ${props => props.backgroundColor || 'inherit'}
 `;
 
 const Figcaption = styled.div`
@@ -26,7 +25,8 @@ const Figcaption = styled.div`
 
 export default () => (
   <Background src={Gif}
-  style={{transform: 'translate(-1px, -2px)'}}>
+    backgroundColor="#fff"
+  >
     <Figcaption>http://giphy.com/gifs/self-esteem-r6xFMQNPfSGGc</Figcaption>
   </Background>
 );
