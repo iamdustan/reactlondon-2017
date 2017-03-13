@@ -59,8 +59,8 @@ const dates = [
 const extendArm = (point, amount) => [point[0] - amount, point[1] - amount * 4];
 
 export default class TimelineSlide extends Component {
-  state = {step: 0};
-  steps = 1;
+  currentStep = 0;
+  steps = 3;
 
   componentWillMount() {
     const {height, width} = this.props;
@@ -95,11 +95,18 @@ export default class TimelineSlide extends Component {
     this.line = null;
   }
 
+  currentStep = 0;
+
   onStep = dir => {
+    console.log('onStep', dir);
     if (dir === 'RIGHT') {
       const diff = +1;
-      if (this.state.step + diff < this.steps) {
-        this.setState({step: this.state.step + diff})
+      if (this.currentStep + diff < this.steps) {
+        this.currentStep++;
+        this.player.onNext();
+        this.player.onNext();
+        this.player.onPlay();
+        console.log('onStep');
         return true;
       }
     } else if (dir === 'LEFT') {
@@ -114,7 +121,10 @@ export default class TimelineSlide extends Component {
 
   onFrame = (frame, state) => {
     if (state === 'PLAYING') {
-      if (frame === 200) {
+      if (frame === 300) {
+        requestAnimationFrame(this.player.onStop);
+      }
+      if (frame === 370) {
         requestAnimationFrame(this.player.onStop);
       }
     }

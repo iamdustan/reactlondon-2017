@@ -43,6 +43,7 @@ export default class Canvas extends React.Component {
   };
 
   drawFrame = frame => {
+    console.log('drawFrame', frame);
     const ctx = this.canvas.getContext('2d');
     // maybe this should be in each section idk
     ctx.clearRect(0, 0, this.props.width, this.props.height);
