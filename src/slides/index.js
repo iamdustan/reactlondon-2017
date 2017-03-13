@@ -7,7 +7,7 @@ import Facepunch from './03';
 import ReactInternals from './04_ReactInternals';
 import DevtoolsBefore from './05_DevtoolsBefore';
 import FiberReconciler from './06_FiberReconciler';
-import CommunityInterop from './07_CommunityInterop';
+// import CommunityInterop from './07_CommunityInterop';
 import ReactRouter from './08_ReactRouter';
 import ReactMotion from './09_ReactMotion';
 import DevtoolsAfter from './10_ReactDevtools';

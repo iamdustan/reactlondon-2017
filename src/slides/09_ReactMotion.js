@@ -11,7 +11,7 @@ import MotionBlessed from '../resources/react-motion-framer-blessed.gif';
 
 const s = {
   position: 'absolute',
-  top: '15%',
+  top: '10%',
   width: '100%',
   textAlign: 'center',
 };
@@ -29,10 +29,10 @@ const Steps = [
   () => [
     <Title.Small style={s}>React Motion</Title.Small>,
     <Motion
-      defaultStyle={{opacity: 0, position: 'absolute', top: '25%'}}
-      style={{opacity: spring(1, {stiffness: 5, damping: 5}), position: 'absolute', top: '25%'}}>
+      defaultStyle={{opacity: 0, position: 'absolute', top: '20%', width: '100%', textAlign: 'center'}}
+      style={{opacity: spring(1, {stiffness: 5, damping: 5}), position: 'absolute', top: '20%', width: '100%', textAlign: 'center'}}>
       {interpolatingStyle => (
-        <div style={interpolatingStyle}>
+        <div style={{...interpolatingStyle}}>
           <img src={MotionDOM} alt="React Motion on DOM" />
         </div>
       )}
@@ -43,8 +43,8 @@ const Steps = [
   () => [
     <Title.Small style={s}>React Motion</Title.Small>,
     <Motion
-      defaultStyle={{opacity: 0, position: 'absolute', top: '25%'}}
-      style={{opacity: spring(1, {stiffness: 5, damping: 5}), position: 'absolute', top: '25%'}}>
+      defaultStyle={{opacity: 0, position: 'absolute', top: '20%', width: '100%', textAlign: 'center'}}
+      style={{opacity: spring(1, {stiffness: 5, damping: 5}), position: 'absolute', top: '20%', width: '100%', textAlign: 'center'}}>
       {interpolatingStyle => (
         <div style={{...interpolatingStyle, position: 'absolute'}}>
           <img src={MotionBlessed} alt="React Motion on DOM" />

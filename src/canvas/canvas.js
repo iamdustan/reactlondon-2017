@@ -61,13 +61,14 @@ export default class Canvas extends React.Component {
     }
   };
 
-  onStop = () => {
+  onStop = (event) => {
     cancelAnimationFrame(this.raf);
     this.stopTime = performance.now();
     this.raf = null;
   };
 
   onPlay = () => {
+    console.log('onPlay');
     // how to recalc startStamp?
     if (!this.raf) {
       this.startStamp = performance.now() - this.frame * Canvas.FRAME;
@@ -76,22 +77,26 @@ export default class Canvas extends React.Component {
   };
 
   onRestart = () => {
+    console.log('onRestart');
     cancelAnimationFrame(this.raf);
     this.startStamp = performance.now();
     this.raf = requestAnimationFrame(this.draw);
   };
 
   onNext = () => {
+    console.log('onNext');
     this.frame++;
     this.drawFrame(this.frame);
   };
 
   onPrev = () => {
+    console.log('onPrev');
     this.frame--;
     this.drawFrame(this.frame);
   };
 
   onJump = (frame: number) => {
+    console.log('onJump');
     this.onStop();
     this.frame = frame;
     this.drawFrame(this.frame);

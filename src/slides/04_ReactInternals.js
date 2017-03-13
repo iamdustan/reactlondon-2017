@@ -25,7 +25,8 @@ const Figcaption = styled.div`
 `;
 
 export default () => (
-  <Background src={Gif}>
+  <Background src={Gif}
+  style={{transform: 'translate(-1px, -2px)'}}>
     <Figcaption>http://giphy.com/gifs/self-esteem-r6xFMQNPfSGGc</Figcaption>
   </Background>
 );

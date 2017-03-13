@@ -6,7 +6,7 @@ import {
 } from '../data';
 
 import Canvas from '../canvas/canvas';
-import Starfield from '../canvas/starfield';
+// import Starfield from '../canvas/starfield';
 import Timeline from '../canvas/timeline';
 
 const INITIAL_FRAME_COUNT = 100;
@@ -115,7 +115,7 @@ export default class TimelineSlide extends Component {
   onFrame = (frame, state) => {
     if (state === 'PLAYING') {
       if (frame === 200) {
-        this.player.onStop();
+        requestAnimationFrame(this.player.onStop);
       }
     }
   };
@@ -134,11 +134,13 @@ export default class TimelineSlide extends Component {
         onFrame={this.onFrame}
         ref={this.refSetter}
       >
+      {/*
         <Starfield
           FRAME={Canvas.FRAME}
           width={this.w}
           height={this.h}
         />
+      */}
         <Timeline
           FRAME={Canvas.FRAME}
           width={width}
