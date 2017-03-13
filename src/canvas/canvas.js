@@ -55,11 +55,15 @@ export default class Canvas extends React.Component {
         ctx.restore();
       }
     }
+
+    if (typeof this.props.onFrame === 'function') {
+      this.props.onFrame(frame, this.raf ? 'PLAYING' : 'PAUSED');
+    }
   };
 
   onStop = () => {
-    this.stopTime = performance.now();
     cancelAnimationFrame(this.raf);
+    this.stopTime = performance.now();
     this.raf = null;
   };
 

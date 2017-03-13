@@ -1,6 +1,6 @@
 
 export const officialTimeline = [
-  { pkg: 'React',
+  { pkg: 'ReactDOM',
     date: 'May 29, 2013',
     commit: '75897c2dcd1dd3a6ca46284dd37e13d22b4b16b4',
   },

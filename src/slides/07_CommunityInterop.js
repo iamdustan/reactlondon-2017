@@ -4,6 +4,6 @@ import {
 } from '../components';
 
 export default () => (
-  <Title><em>Dramatic Community <br />Interop Segue</em></Title>
+  <Title.Centered>General Purpose <br />React Components</Title.Centered>
 );
 

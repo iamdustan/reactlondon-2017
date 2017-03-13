@@ -1,5 +1,6 @@
 /* @flow */
 
+import Setup from './00_Setup';
 import Intro from './01_Intro';
 import Timeline from './02_Timeline';
 import Facepunch from './03';
@@ -14,13 +15,14 @@ import LearnOnce from './11_LearnOnce';
 import RenderEverywhere from './12_RenderEverywhere';
 
 export default [
+  Setup,
   Intro,
   Timeline,
   Facepunch,
   ReactInternals,
   DevtoolsBefore,
   FiberReconciler,
-  CommunityInterop,
+  // CommunityInterop,
   ReactRouter,
   ReactMotion,
   DevtoolsAfter,

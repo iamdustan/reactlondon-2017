@@ -1,5 +1,14 @@
+/* @flow */
+
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+import './codemirror.css';
+
 import React from 'react';
 import Typewriter from 'react-typewriter';
+import Codemirror from 'react-codemirror';
+import 'codemirror/mode/javascript/javascript';
+
 const source = `
 function tryToConnect() {
   ws.send('attach:agent');
@@ -29,7 +38,6 @@ function initialize(text) {
       InstanceHandles: require('react/lib/ReactInstanceHandles'),
       Mount: require('../ReactHardwareMount')['default'],
       Reconciler: require('react/lib/ReactReconciler'),
-      // TextComponent: require('ReactNativeTextComponent'),
     });
   }
 
@@ -41,16 +49,27 @@ const style = {
   fontSize: 24,
   fontWeight: 300,
   padding: '2.5% 15%',
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  right: 0,
+  left: 0,
 };
+
 export default class DevtoolsBefore extends React.Component {
+  state = {source: ''};
+  onTyped = character => {
+    this.setState({source: this.state.source + character});
+  };
   render() {
-    return (
-      <div style={style}>
-        <Typewriter typing={1} minDelay={0} maxDelay={33.3333}>
-          <pre>{source}</pre>
-        </Typewriter>
-      </div>
-    );
+    return [
+      <Typewriter onTyped={this.onTyped} typing={1} minDelay={0} maxDelay={33.3333}><span hidden>{source}</span></Typewriter>,
+      <Codemirror style={style} value={this.state.source} options={{
+        mode: 'javascript',
+        theme: 'material',
+        fullscreen: true,
+      }} />,
+    ];
   }
 }
 

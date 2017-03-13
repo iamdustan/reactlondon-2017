@@ -4,6 +4,6 @@ import {
 } from '../components';
 
 export default () => (
-  <Title>React Anywhere<br />Render Everywhere</Title>
+  <Title.Centered>React Anywhere<br />Render Everywhere</Title.Centered>
 );
 

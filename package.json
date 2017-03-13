@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "16.0.0-alpha.3",
+    "react-codemirror": "^0.3.0",
     "react-dom": "16.0.0-alpha.3",
+    "react-motion": "^0.4.7",
     "react-typewriter": "^0.4.1",
     "styled-components": "^1.4.4"
   },

@@ -10,7 +10,7 @@ const getParticles = (count, width, height, fieldOfVision, ctx) =>
     z: randomInRange(-fieldOfVision, fieldOfVision),
     vx: 4 * Math.random() - 2,
     vy: 4 * Math.random() - 2,
-    vz: -2,
+    vz: -Math.random(),
     update(frame) {
       // TODO: make this frame aware
       this.x += this.vx;

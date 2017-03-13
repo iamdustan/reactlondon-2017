@@ -9,6 +9,21 @@ const fadeIn = keyframes`
   }
 `;
 
+const blink = keyframes`
+  0 {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  50.1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 
 export const FullScreen = styled.div`
   position: fixed;
@@ -22,10 +37,28 @@ export const FullScreen = styled.div`
 export const Title = styled.div`
   font-size: 144px;
   font-weight: bold;
+`;
+
+Title.Centered = styled.div`
+  font-size: 144px;
+  font-weight: bold;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+Title.Small = styled.div`
+  font-size: 72px;
+  font-weight: bold;
+`;
+
+export const Centered = styled.div`
+  position: fixed;
+  text-align: center;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 100%;
 `;
 
 export const Fade = styled.div`
@@ -49,5 +82,14 @@ export const BlendedImage = styled.div`
   background-position: 100% 100%;
   background-blend-mode: color-burn;
   background-color: ${props => props.backgroundColor || 'inherit'}
+`;
+
+export const Blink = styled.div`
+  display: inline;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: ${props => typeof props.duration === 'number' ? props.duration : 1}s;
+  animation-name: ${blink};
+  animation-iteration-count: infinite;
 `;
 
