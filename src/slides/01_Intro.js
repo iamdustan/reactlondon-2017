@@ -7,162 +7,119 @@ import {
 } from 'react-motion';
 
 import ReactLogo from '../logo.svg';
-import Pete from '../resources/pete.jpg';
 import {
-  BlendedImage,
   Centered,
   FullScreen,
-  Title,
   Fade,
-  Blink,
+  // Title,
+  // Blink,
 } from '../components';
 import {colors} from '../components/theme';
+import styled from 'styled-components';
 import Multislide from '../components/multislide';
+import Map from '../Map';
 
-const s = {
-  display: 'inline-block',
-  verticalAlign: 'middle',
-};
+const Image = styled.div`
+  display: inline-block;
+  float: left;
+  vertical-align: middle;
+`;
+
+const Text = styled.span`
+  color: ${colors.black};
+  display: block;
+  font-size: 90px;
+`;
+
+const Is = styled.span`
+  border-bottom: 2px solid ${colors.black};
+  font-weight: 100;
+  position: relative;
+  top: 70px;
+  left: -40px;
+`;
+
+const Sub = styled.span`
+  clear: left;
+  display: block;
+  position: relative;
+  left: 115px;
+  top: -30px;
+  letter-spacing: 3px;
+`;
+
+const Four = styled.span`
+  display: block;
+  font-size: 260px;
+  font-weight: 600;
+  width: 300px;
+  position: absolute;
+  left: 390px;
+  top: 0px;
+`;
 
 const ReactImage = (props) => (
-  <div style={{...s, opacity: props.value}}>
-    <img height={props.value * 150} src={ReactLogo} alt="React" />
-  </div>
+  <Image style={{opacity: props.value}}>
+    <img height={240} src={ReactLogo} alt="React" />
+  </Image>
 );
+
+const Base = ({number, ...props}) =>
+  <Centered {...props}>
+    <div style={{textAlign: 'left', width: 560, margin: '0 auto', position: 'relative', left: -40}}>
+      <ReactImage />
+      <Text><Is>is</Is> <Four>{number || 4}</Four> <Sub>years old</Sub></Text>
+    </div>
+  </Centered>;
 
 const Steps = [
   // 1
-  ({onRest}) => (
-    <FullScreen background={colors.black}>
-      <Motion defaultStyle={{opacity: 0}} style={{opacity: spring(1, {stiffness: 5, damping: 5})}} onRest={onRest}>
-        {interpolatingStyle =>
-          <FullScreen style={interpolatingStyle} background={colors.purple}>
-            <Centered>
-              <Title style={interpolatingStyle}>2013</Title>
-            </Centered>
-          </FullScreen>
-        }
+  () => (
+    <FullScreen background={colors.white}>
+      <Motion defaultStyle={{opacity: 0}} style={{opacity: spring(1, {stiffness: 5, damping: 5})}}>
+        {interpolatingStyle => <Base style={interpolatingStyle} />}
       </Motion>
     </FullScreen>
   ),
 
   // 2
-  ({onRest}) => (
-    <Centered>
-      <Motion defaultStyle={{value: 0}} style={{value: spring(1, {stiffness: 40, damping: 5})}} onRest={onRest}>
-        {interpolatingStyle => <ReactImage value={interpolatingStyle.value} />}
+  () => (
+    <FullScreen background={colors.white}>
+      <Motion defaultStyle={{number: 4}} style={{number: spring(144, {stiffness: 5, damping: 5})}}>
+        {interpolatingStyle => <Base number={Math.ceil(interpolatingStyle.number)} />}
       </Motion>
-      <Title style={s}>2013</Title>
-    </Centered>
+    </FullScreen>
   ),
 
   // 3
-  ({onRest}) => [
-    <Centered style={{zIndex: 1}}>
-      <ReactImage value={1} />
-      <Title style={s}>2013</Title>
-    </Centered>,
-    <Motion defaultStyle={{opacity: 0}} style={{opacity: spring(1, {stiffness: 5, damping: 5})}} onRest={onRest}>
-      {interpolatingStyle => <BlendedImage style={interpolatingStyle} backgroundColor="purple" backgroundSize="75%" src={Pete} />}
-    </Motion>,
+  () => [
+    <Base style={{zIndex: 1}} number={144} />,
+    <FullScreen
+      style={{zIndex: 3}}
+      background={colors.white}>
+      <Fade duration={2}>
+        <Map />
+      </Fade>
+    </FullScreen>
   ],
 
+  /*
   // 4
-  ({onRest}) => [
-    <Centered style={{zIndex: 1}}>
-      <ReactImage value={1} />
-      <Title style={s}>2013</Title>
-    </Centered>,
-    <BlendedImage backgroundColor="purple" backgroundSize="75%" src={Pete} />,
+  () => [
+    <Base style={{zIndex: 1}} number={144} />,
     <Fade style={{zIndex: 3, position: 'relative'}} duration={2}>
       <FullScreen background="black">
-        <Title.Centered>HTML is <br />only the <br />beginning<Blink>.</Blink></Title.Centered>
+        <Title.Centered>
+          HTML is <br />only the <br />beginning<Blink>.</Blink>
+          <div style={{fontSize: 10, opacity: 0.5, marginTop: '3em', fontWeight: 100, letterSpacing: 1}}>
+            https://facebook.github.io/react/blog/2013/06/05/why-react.html
+          </div>
+        </Title.Centered>
       </FullScreen>
     </Fade>
   ],
+  */
 ];
 
 export default Multislide(Steps);
-
-/*
-export default class IntroSlide extends React.Component {
-  state = {step: 0}
-  steps = 4;
-  onStep = dir => {
-    if (dir === 'RIGHT') {
-      const diff = +1;
-      if (this.state.step + diff < this.steps) {
-        this.setState({step: this.state.step + diff})
-        return true;
-      }
-    } else if (dir === 'LEFT') {
-      const diff = -1;
-      if (this.state.step + diff > -1) {
-        this.setState({step: this.state.step + diff})
-        return true;
-      }
-    }
-    return false;
-  };
-
-  next = () => {
-    this.setState({step: Math.min(this.state.step + 1, this.steps - 1)});
-  }
-
-  render() {
-    const Step = Steps[this.state.step];
-
-    return <FullScreen background="#6b0e6b">
-      <Step onRest={this.next} />
-    </FullScreen>;
-  }
-}
-*/
-
-            /*
-    <StaggeredMotion
-      defaultStyles={[{opacity: 0}, {opacity: 0, scale: 0}]}
-      styles={prevInterpolatedStyles => prevInterpolatedStyles.map((_, i) => {
-        return i === 0
-          ? {opacity: spring(1, {stiffness: 5, damping: 5})}
-          : {
-              opacity: spring(prevInterpolatedStyles[i - 1].opacity, {stiffness: 5, damping: 5}),
-              scale: spring(prevInterpolatedStyles[i - 1].opacity, {stiffness: 5, damping: 5})
-            }
-      })}>
-      {interpolatingStyles =>
-        <Centered>
-          {interpolatingStyles.map((style, i) => {
-            if (i === 0) return <Title key={i} style={{
-              display: 'inline-block',
-              verticalAlign: 'middle',
-              opacity: style.opacity,
-            }}>2013</Title>;
-            if (i === 1) return <div key={i} style={{
-              display: 'inline-block',
-              verticalAlign: 'middle',
-              opacity: style.opacity,
-            }}><img height={style.scale * 150} src={ReactLogo} /></div>
-          }).reverse()}
-        </Centered>}
-    </StaggeredMotion>
-
-  /*
-  <FullScreen>
-    <Fade delay={7}><BlendedImage backgroundColor="purple" backgroundSize="50%" src={Pete} /></Fade>
-    <Fade>
-      <Title>
-        <Bounce
-          <Fade delay={5} duration={2} style={{display: 'inline-block', verticalAlign: 'middle'}}><img width={212} src={ReactLogo} /></Fade>
-        </Bounce>
-        2013
-      </Title>
-    </Fade>
-    <Fade delay={15} duration={2}>
-      <FullScreen background="black">
-        <Title>HTML is <br />only the <br />beginning.</Title>
-      </FullScreen>
-    </Fade>
-  </FullScreen>
-  */
 

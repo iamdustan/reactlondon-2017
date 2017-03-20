@@ -39,10 +39,15 @@ class App extends Component {
   componentDidMount() {
     // just giving the JS engine some time to flush
     setTimeout(() => {
-      this.setState({slide: 0});
+      var slide = 0;
+      if (location.hash) {
+        slide = parseInt(location.hash.replace('#', ''), 10);
+      }
+      this.setState({slide});
       this.setDims();
     }, 1000);
     window.addEventListener('resize', this.setDims)
+    window.addEventListener('hashchange', this.setFromHash);
     document.addEventListener('keyup', this.handleKeyPress, false);
   }
 
@@ -50,18 +55,27 @@ class App extends Component {
     document.removeEventListener('keyup', this.handleKeyPress);
   }
 
+  setFromHash = (event) => {
+    const slide = parseInt(location.hash.replace('#', ''), 10);
+    this.setState({slide});
+  };
+
   handleKeyPress = (event) => {
     switch (event.which) {
       case PAGEUP:
       case LEFT:
         if (this.slide && this.slide.onStep && this.slide.onStep('LEFT')) return;
         if (this.state.slide < 1) return;
-        return this.setState({slide: this.state.slide - 1});
+        location.hash = this.state.slide - 1;
+        return;
+        // return this.setState({slide: this.state.slide - 1});
       case PAGEDOWN:
       case RIGHT:
         if (this.slide && this.slide.onStep && this.slide.onStep('RIGHT')) return;
         if (this.state.slide >= slides.length - 1) return;
-        return this.setState({slide: this.state.slide + 1});
+        location.hash = this.state.slide + 1;
+        return;
+        // return this.setState({slide: this.state.slide + 1});
       default:
         // do nothing, eslint
     }
