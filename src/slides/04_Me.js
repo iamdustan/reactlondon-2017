@@ -14,7 +14,7 @@ const Title = styled.div`
   font-size: 96px;
   font-weight: 700;
   margin-right: 10%;
-  margin-top: 150px;
+  margin-top: 300px;
   text-align: right;
 `;
 
@@ -27,33 +27,41 @@ const Sub = styled.div`
 const Logo = styled.div`
   position: absolute;
   right: 5%;
-  margin-top: -240px;
+  margin-top: -100px;
   margin-left: 50%;
 `;
 
-const Main = () => (
+const Main = ({children}) => (
   <Centered>
     <Title>@iamdustan</Title>
-    <Fade>
-      <Sub>React Hardware</Sub>
-      <Sub>Tiny React Renderer</Sub>
-    </Fade>
+    {children}
   </Centered>
 );
 
+const Created = () => [
+  <Sub>React Hardware</Sub>,
+  <Sub>Tiny React Renderer</Sub>,
+];
+
 const slides = [
-  () => <FullScreen color="#000"><Main /></FullScreen>,
+  () => <FullScreen background="#000">
+    <Main>
+      <div style={{opacity: 0}}><Created /></div>
+    </Main>
+  </FullScreen>,
+  () => <FullScreen background="#000">
+    <Main>
+      <Fade duration={2}><Created /></Fade>
+    </Main>
+  </FullScreen>,
 
   () => (
-    <FullScreen color="#000">
+    <FullScreen background="#000">
       <Centered>
-        <Logo><Webflow /></Logo>
+        <Fade duration={2}><Logo><Webflow /></Logo></Fade>
 
         <Title>@iamdustan</Title>
-        <div>
-          <Sub>React Hardware</Sub>
-          <Sub>Tiny React Renderer</Sub>
-        </div>
+        <div><Created /></div>
       </Centered>
     </FullScreen>
   ),

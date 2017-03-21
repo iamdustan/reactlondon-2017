@@ -13,10 +13,12 @@ import styled from 'styled-components';
 import Multislide from '../components/multislide';
 import Webflow from '../resources/webflow.svg';
 
+import TheTweet from '../resources/sunil-tweet.png';
+
 const slides = [
   () => <FullScreen color="#000">
     <Centered>
-      <Title style={{fontSize: 96}}>
+      <Title style={{fontSize: 96, lineHeight: 1.2, textAlign: 'left', padding: '0 15%'}}>
         Fiber Concepts<br />
         Renderer Concepts<br />
         React Hardware
@@ -24,15 +26,17 @@ const slides = [
     </Centered>
   </FullScreen>,
 
+  /*
   () => <FullScreen color="#000">
     <Centered>
       <Title>But why?</Title>
     </Centered>
   </FullScreen>,
+  */
 
   () => <FullScreen color="#000">
     <Centered>
-      <Title>TODO: find tweet about 2017 being the year of renderers</Title>
+      <img src={TheTweet} alt="Sunil and I agree" />
     </Centered>
   </FullScreen>,
 ];

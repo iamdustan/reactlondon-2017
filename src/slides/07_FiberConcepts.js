@@ -35,6 +35,7 @@ const ArrowContainer = styled.div`
   padding: 1.5em;
   color: #333;
   ${props => typeof props.scale !== 'undefined' ? `transform: scale(${props.scale});` : ''}
+  opacity: 0;
 `;
 
 const Arrow = (props) => <ArrowContainer {...props}>←</ArrowContainer>
@@ -163,15 +164,17 @@ const steps = [
           </BubbleContainer>
         }
       </StaggeredMotion>,
-      <Fade>
-        <Centered>
-          <img src={CartoonImage} alt="Cartoon intro to Fiber" style={{width: '60%'}}/>
-          <div>
-            <div>A Cartoon Intro To Fiber</div>
-            by Lin Clark<br />
-            https://www.youtube.com/watch?v=ZCuYPiUIONs
-          </div>
-        </Centered>
+      <Fade duration={1}>
+        <FullScreen background="#fff">
+          <Centered>
+            <img src={CartoonImage} alt="Cartoon intro to Fiber" style={{width: '60%'}}/>
+            <div style={{color: '#000'}}>
+              <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
+              https://www.youtube.com/watch?v=ZCuYPiUIONs<span style={{display: 'inline-block', width: '24em'}} />
+              by Lin Clark
+            </div>
+          </Centered>
+        </FullScreen>
       </Fade>
     ],
   }),

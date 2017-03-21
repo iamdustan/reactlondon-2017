@@ -9,6 +9,7 @@ import Outline from './05_Outline';
 import Demos from './06_Demos';
 import FiberConcepts from './07_FiberConcepts';
 import RendererConcepts from './08_RendererConcepts';
+import Guide from './09_LetsDoIt';
 
 
 export default [
@@ -16,11 +17,12 @@ export default [
   Intro,
   Map,
   Today,
-  Me,
   Outline,
+  Me,
   Demos,
   FiberConcepts,
   RendererConcepts,
+  Guide,
 
   /*
   CommunityInterop,
