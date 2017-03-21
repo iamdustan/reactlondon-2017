@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 import './index.css';
 
-const Nav = ({children}) => <div>{children}</div>
+const Nav = ({children}) => <div hidden>{children}</div>
 const Container = ({children}) => children;
 const AppContainer = () => (
   <Router>
@@ -19,7 +19,8 @@ const AppContainer = () => (
         <Link to="/map">Map</Link>
       </Nav>
 
-      <Route exact path="/" component={Slides}/>
+      <Route exact path="/" component={Slides} />
+      <Route exact path="/reactlondon-2017/" component={Slides} />
       <Route path="/map" component={Map}/>
     </Container>
   </Router>

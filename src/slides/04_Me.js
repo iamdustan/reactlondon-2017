@@ -5,7 +5,6 @@ import {
   Centered,
   FullScreen,
   Fade,
-  Blink,
 } from '../components';
 import styled from 'styled-components';
 import Multislide from '../components/multislide';

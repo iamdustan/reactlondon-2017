@@ -33,7 +33,7 @@ class App extends Component {
     // 15 for scrollbar width
     const width = document.documentElement.clientWidth - WIDTH_OFFSET; // || window.innerWidth || 0;
     const height = document.documentElement.clientHeight - WIDTH_OFFSET; // || window.innerHeight || 0;
-    this.setState({ready: true, width, height});
+    this.setState(state => ({ready: true, width, height}));
   };
 
   componentDidMount() {
@@ -43,8 +43,9 @@ class App extends Component {
       if (location.hash) {
         slide = parseInt(location.hash.replace('#', ''), 10);
       }
-      this.setState({slide});
+      this.setState(state => ({slide}));
       this.setDims();
+      document.body.removeAttribute('style');
     }, 1000);
     window.addEventListener('resize', this.setDims)
     window.addEventListener('hashchange', this.setFromHash);
