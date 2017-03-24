@@ -11,17 +11,42 @@ import {
 } from '../components';
 import Map from './map.svg';
 
-const springConfig = null; /*{
+const springConfig = {
   stiffness: 5,
   damping: 5,
 };
-*/
+
+type Step = {|
+  x: number,
+  y: number,
+  scale: number,
+  height: number,
+  width: number,
+|};
+
+const Position = (props : Step & {children: any}) => (
+  <div
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    }}>
+      <div style={{
+        transform: `translate(${props.x}px, ${props.y}px) scale(${props.scale})`,
+        transformOrigin: '0 0 0',
+      }}>
+      {props.children}
+    </div>
+  </div>
+);
 
 export default class extends React.Component {
   state = {step: 0};
-  steps = [
-    {width: 2000, height: 2000, x: 250, y: 350},
-    {width: 2000, height: 2000, x: 400, y: 350},
+  steps : Array<Step> = [
+    {width: 2000, height: 2000, x: -250, y: -350, scale: 4},
+    {width: 2000, height: 2000, x: -400, y: -350, scale: 4},
   ];
 
   onStep = dir => {
@@ -46,7 +71,7 @@ export default class extends React.Component {
     if (this.state.step === 0) {
       return (
         <FullScreen background={'#ffffff'}>
-          <Map {...this.steps[this.state.step]} />
+          <Position {...this.steps[this.state.step]}><Map /></Position>
         </FullScreen>
       );
     }
@@ -61,11 +86,12 @@ export default class extends React.Component {
           style={{
             x: spring(step.x, springConfig),
             y: spring(step.y, springConfig),
+            scale: spring(step.scale, springConfig),
             width: step.width,
             height: step.height,
           }}
         >
-          {value => <Map {...value} />}
+          {value => <Position {...value}><Map /></Position>}
         </Motion>
       </FullScreen>
     );

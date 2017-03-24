@@ -1,9 +1,14 @@
 import React from 'react';
 
-export default ({width, height, x, y}) => (
+export default ({
+  width = 400,
+  height = 400,
+  x = 0,
+  y = 0
+}) => (
   <svg
-    height={height || "400"}
-    width={width || "400"}
+    height={height}
+    width={width}
     viewBox={`${x - 500} ${y - 500} 1000 1000`}
   >
     <path className="river" d="M-53.90617976360905,-437.61267001046576L-51.88850999783301,-439.548070558971L-47.9454351413845,-440.3819052678479" />

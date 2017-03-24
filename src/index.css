@@ -8,6 +8,16 @@ body {
   color: #fff;
 }
 
+.field,
+.coast,
+.river,
+.slope,
+.border {
+  fill: none;
+  stroke: black;
+  stroke-linecap: round;
+}
+
 .field {
   stroke: none;
   fill-opacity: 1.0;
@@ -29,13 +39,5 @@ body {
   stroke-width: 5;
   stroke-dasharray: 4,4;
   stroke-linecap: butt;
-}
-
-.river,
-.slope,
-.border {
-  fill: none;
-  stroke: black;
-  stroke-linecap: round;
 }
 

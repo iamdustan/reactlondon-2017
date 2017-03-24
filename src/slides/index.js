@@ -6,10 +6,12 @@ import Map from './02_Map';
 import Today from './03_Today';
 import Me from './04_Me';
 import Outline from './05_Outline';
-import Demos from './06_Demos';
+import Renderers from './06_Renderers';
+import Terms from './07_Terminology';
 import FiberConcepts from './07_FiberConcepts';
 import RendererConcepts from './08_RendererConcepts';
 import Guide from './09_LetsDoIt';
+import Walkthrough from './10_Code';
 
 
 export default [
@@ -19,10 +21,14 @@ export default [
   Today,
   Outline,
   Me,
-  Demos,
+
+  Terms,
+  Renderers,
+
   FiberConcepts,
   RendererConcepts,
   Guide,
+  Walkthrough,
 
   /*
   CommunityInterop,

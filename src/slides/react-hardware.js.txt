@@ -1,0 +1,212 @@
+const firmata = require('firmata');
+const setPayloadForPin = () => {};
+const setInitialProperties = () => {};
+const diffProperties = () => {};
+const Containers = new Map();
+const emptyObject = {};
+
+
+
+
+// Currently, you need to install a fiber reconciler to get access to these.
+// eventually it will be distributed standalone or with react core.
+const ReactFiberReconciler = require('react-dom/lib/ReactFiberReconciler');
+const { injectInternals } = require('react-dom/lib/ReactFiberDevToolsHook');
+
+type HostContext = Board;
+type Container = Board;
+type Props = Object;
+type Instance = {|
+  __IO__: HostContext,
+  props: Props,
+  type: string,
+|};
+type TextInstance = string;
+type EmptyObject = {||};
+
+const IO_KEY = '__IO__';
+const HardwareReconciler = ReactFiberReconciler({
+
+  // New Fiber feature. Async Rendering!
+  scheduleAnimationCallback: (fn : Function) => {}, // window.requestAnimationFrame,
+  scheduleDeferredCallback: (fn : (deadline : Deadline) => void) => {}, // window.requestIdleCallback,
+  useSyncScheduling: false,
+
+
+
+  // before and after commit hooks
+  prepareForCommit() : void {},
+  resetAfterCommit() : void {},
+
+
+
+  // getRootHostContext(rootContainerInstance : C) : CX,
+  getRootHostContext(rootContainerInstance : Board) : Board {
+    return rootContainerInstance;
+  },
+
+  // getChildHostContext(parentHostContext : CX, type : T) : CX,
+  getChildHostContext(
+    parentHostContext : string | null,
+    type : string
+  ) : EmptyObject {
+    return emptyObject;
+  },
+
+  getPublicInstance(instance : Instance | TextInstance) : Instance | TextInstance {
+    return instance;
+  },
+
+
+
+  createInstance(
+    type : string,
+    props : Props,
+    rootContainerInstance : Container,
+    hostContext : string | null,
+    internalInstanceHandle : Object,
+  ): Instance {
+    return Object.assign(
+      {[IO_KEY]: rootContainerInstance},
+      {type, props}
+    );
+  },
+
+  createTextInstance(
+    text : string,
+    rootContainerInstance : Container,
+    hostContext : CX,
+    internalInstanceHandle : OpaqueHandle
+  ) : TextInstance {
+    return text;
+  },
+
+
+
+
+  finalizeInitialChildren(
+    element : Instance,
+    type : string,
+    props : Props,
+    rootContainerInstance : Container
+  ) {
+    setInitialProperties(element, type, props, rootContainerInstance);
+  },
+
+  appendInitialChild(
+    parentInstance: Instance,
+    child: Instance | TextInstance
+  ) {
+    setPayloadForPin(parentInstance, child);
+  },
+
+
+
+  appendChild(
+    parentInstance: Instance | Container,
+    child: Instance | TextInstance
+  ) {
+    setPayloadForPin(parentInstance, child);
+  },
+
+  insertBefore(
+    parentInstance : Instance | Container,
+    child : Instance | TextInstance,
+    beforeChild : Instance |  TextInstance
+  ) {
+    // noop. Hardware pins aren’t actually modeled as a tree.
+  },
+
+  removeChild(parentInstance : Instance | Container, child : Instance | TextInstance) : void {
+    setPayloadForPin(
+      parentInstance,
+      Object.assign({}, child, {value: 0})
+    );
+  },
+
+
+
+  commitTextUpdate(textInstance : TI, oldText : string, newText : string) : void {},
+  resetTextContent(instance : I) : void {},
+  shouldSetTextContent(props: Props) : boolean {
+    return false;
+  },
+
+
+
+
+  prepareUpdate(
+    instance : Instance,
+    type : string,
+    oldProps : Props,
+    newProps : Props,
+    rootContainerInstance : Container,
+    hostContext : HostContext,
+  ) : null | Array<mixed> {
+    // diffing properties in prepareUpdate allows the reconciler to reuse work
+    return diffProperties(instance, type, oldProps, newProps, rootContainerInstance);
+  },
+
+  commitUpdate(
+    instance : Instance,
+    updatePayload : Payload,
+    type : string,
+    oldProps : Props,
+    newProps : Props,
+    internalInstanceHandle : OpaqueHandle
+  ) : void {
+    setPayloadForPin(instance, updatePayload);
+    instance.props = newProps;
+  },
+
+  commitMount(
+    instance : Instance,
+    type : string,
+    newProps : Props,
+    internalInstanceHandle : OpaqueHandle
+  ) : void {},
+
+
+  shouldDeprioritizeSubtree(type : T, props : P) : boolean {
+    return false;
+  },
+});
+
+
+
+// React Devtools integration
+
+if (typeof injectInternals === 'function') {
+  injectInternals({
+    findFiberByHostInstance: () => null, // ReactHardwareComponentTree.getClosestInstanceFromNode,
+    findHostInstanceByFiber: HardwareReconciler.findHostInstance,
+  });
+}
+
+// Renderer
+
+const HardwareRenderer = {
+  render(
+    element: React.Element<*>,
+    container : Port,
+    callback : ?Function
+  ) {
+    const root = Containers.get(container);
+    if (root) {
+      HardwareReconciler.updateContainer(element, root, null, callback);
+    } else {
+      const board = new firmata.Board(container, (error) => {
+        if (error) return callback(error);
+        const root = HardwareReconciler.createContainer(container);
+        HardwareReconciler.updateContainer(element, root, null, callback);
+        Containers.set(container, root);
+      });
+
+      board.on('error', (error) => console.log('Error!', error));
+      board.on('close', () => console.info('Board in port "%s" closed', container));
+    }
+  }
+};
+
+module.exports = HardwareRenderer;
+

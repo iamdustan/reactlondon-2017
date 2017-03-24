@@ -15,6 +15,7 @@ import {colors} from '../components/theme';
 import Multislide from '../components/multislide';
 
 import CartoonImage from '../resources/cartoon-intro.png';
+import AcdliteImage from '../resources/acdlite.png';
 
 const Bubble = styled.div`
   color: #000;
@@ -48,9 +49,9 @@ const BubbleContainer = styled.div`
 `;
 
 const textFor = [
-  'Unit of Work',
+  'Priority',
   'Scheduling',
-  'Fiber',
+  'Unit of Work',
 ];
 
 const TITLE = 'Fiber Concepts';
@@ -178,40 +179,35 @@ const steps = [
       </Fade>
     ],
   }),
+
+  slide({
+    color: colors.black,
+    children: [
+      <FullScreen background="#fff">
+        <Centered>
+          <img src={CartoonImage} alt="Cartoon intro to Fiber" style={{width: '60%'}}/>
+          <div style={{color: '#000'}}>
+            <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
+            https://www.youtube.com/watch?v=ZCuYPiUIONs<span style={{display: 'inline-block', width: '24em'}} />
+            by Lin Clark
+          </div>
+        </Centered>
+      </FullScreen>,
+      <Fade duration={1}>
+        <FullScreen background="#fff">
+          <Centered>
+            <img src={AcdliteImage} alt="What’s Next For React" style={{width: '60%'}}/>
+            <div style={{color: '#000'}}>
+              <Title style={{fontSize: 72}}>What’s Next For React</Title>
+              https://www.youtube.com/watch?v=aV1271hd9ew<span style={{display: 'inline-block', width: '24em'}} />
+              by Andrew Clark
+            </div>
+          </Centered>
+        </FullScreen>
+      </Fade>
+    ],
+  }),
 ];
 
 export default Multislide(steps);
-/*
-class FiberReconcilerSlide extends React.Component {
-  state = {step: 0}
-  steps = steps.length;
-  onStep = dir => {
-    if (dir === 'RIGHT') {
-      const diff = +1;
-      if (this.state.step + diff < this.steps) {
-        this.setState({step: this.state.step + diff})
-        return true;
-      }
-    } else if (dir === 'LEFT') {
-      const diff = -1;
-      if (this.state.step + diff > -1) {
-        this.setState({step: this.state.step + diff})
-        return true;
-      }
-    }
-    return false;
-  };
-
-  next = () => {
-    this.setState({step: Math.min(this.state.step + 1, this.steps - 1)});
-  }
-
-  render() {
-    const Slide = steps[this.state.step];
-    return <FullScreen background="black">
-      <Slide onRest={this.next} />
-    </FullScreen>;
-  }
-}
-*/
 
