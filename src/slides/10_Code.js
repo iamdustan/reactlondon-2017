@@ -13,8 +13,6 @@ const src = atob(Code
 
 const html = Prism.highlight(src, Prism.languages.javascript);
 class CodeSlide extends React.Component {
-  componentWillMount() {
-  }
   render() {
     return <FullScreen background="#000">
       <pre style={{padding: '5% 15%', fontSize: 16, overflowY: 'scroll', height: '90%', boxSizing: 'border-box'}}>

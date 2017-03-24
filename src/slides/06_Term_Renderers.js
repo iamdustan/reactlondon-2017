@@ -13,7 +13,6 @@ import Multislide from '../components/multislide';
 import DomDemo from '../demos/dom';
 import Codemirror from 'react-codemirror';
 import 'codemirror/mode/javascript/javascript';
-import Prism from 'prismjs';
 
 import NativeGif from '../resources/ato-counter-native.gif';
 import BlessedGif from '../resources/ato-counter-blessed.gif';

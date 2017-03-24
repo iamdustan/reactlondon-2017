@@ -97,7 +97,7 @@ Base.titleStyle = {fontSize: 72};
 
 const steps = [
   // step 1
-  ({onRest}) => (
+  () => (
     <FullScreen background={colors.purple}>
       <Centered>
         <Motion defaultStyle={{opacity: 0}} style={{opacity: spring(1, {stiffness: 5, damping: 5})}}>
@@ -108,12 +108,12 @@ const steps = [
   ),
 
   // step 2
-  ({onRest}) => (
+  () => (
     <Motion defaultStyle={{top: 50, fontSize: 126, bubbleScale: 0}} style={{
       top: spring(15, {stiffness: 100, damping: 10}),
       fontSize: spring(72, {stiffness: 100, damping: 10}),
       bubbleScale: spring(1, {stiffness: 100, damping: 10}),
-    }} onRest={onRest}>
+    }}>
       {interpolatingStyle => <div>
         <Centered style={{top: interpolatingStyle.top + '%'}}>
           <Title style={{fontSize: interpolatingStyle.fontSize}}>{TITLE}</Title>
