@@ -10,7 +10,7 @@ import Multislide from '../components/multislide';
 import TheTweet from '../resources/sunil-tweet.png';
 
 const slides = [
-  () => <FullScreen color="#000">
+  () => <FullScreen background="#fff">
     <Centered>
       <img src={TheTweet} alt="Sunil and I agree" />
     </Centered>

@@ -43,9 +43,6 @@ export default [
   RendererIntro,
   RendererConcepts,
 
-  RendererIntro,
-  RendererConcepts,
-
   GuideIntro,
   Guide,
   Walkthrough,

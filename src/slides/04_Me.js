@@ -8,7 +8,8 @@ import {
 } from '../components';
 import styled from 'styled-components';
 import Multislide from '../components/multislide';
-import Webflow from '../resources/webflow.svg';
+import WebflowMov from '../resources/webflow.mov';
+import WebflowOgg from '../resources/webflow.ogv';
 
 const Title = styled.div`
   font-size: 96px;
@@ -22,13 +23,6 @@ const Sub = styled.div`
   font-size: 48px;
   margin-right: 10%;
   text-align: right;
-`;
-
-const Logo = styled.div`
-  position: absolute;
-  right: 5%;
-  margin-top: -100px;
-  margin-left: 50%;
 `;
 
 const Main = ({children}) => (
@@ -51,20 +45,39 @@ const slides = [
   </FullScreen>,
   () => <FullScreen background="#000">
     <Main>
-      <Fade duration={2}><Created /></Fade>
+      <Fade duration={2}><Sub>React Hardware</Sub></Fade>
+      <Fade duration={2} delay={1}><Sub>Tiny React Renderer</Sub></Fade>
     </Main>
   </FullScreen>,
 
   () => (
     <FullScreen background="#000">
       <Centered>
-        <Fade duration={2}><Logo><Webflow /></Logo></Fade>
-
         <Title>@iamdustan</Title>
         <div><Created /></div>
       </Centered>
     </FullScreen>
   ),
+
+  () => [
+    <FullScreen background="#000">
+      <Centered>
+        <Title>@iamdustan</Title>
+        <div><Created /></div>
+      </Centered>
+    </FullScreen>,
+    <Fade duration={1}>
+      <FullScreen background="#fff">
+        <Centered>
+          <video width="100%" autoPlay>
+            <source src={WebflowOgg} type="video/ogg" />
+            <source src={WebflowMov} type="video/mov" />
+          </video>
+        </Centered>
+      </FullScreen>
+    </Fade>
+  ],
+
 ];
 
 export default Multislide(slides);

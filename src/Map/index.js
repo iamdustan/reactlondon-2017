@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable */
 
 import React from 'react';
 import {
@@ -7,6 +8,7 @@ import {
 } from 'react-motion';
 
 import {
+  Fade,
   FullScreen,
 } from '../components';
 import Map from './map.svg';
@@ -23,6 +25,41 @@ type Step = {|
   height: number,
   width: number,
 |};
+
+
+const positionCenterItem = (props) => {
+  const scale = props.width > props.height
+    ? props.width / NATURAL_WIDTH
+    : props.height / NATURAL_HEIGHT;
+
+  const transform = props.width > props.height
+      ? ('0, ' + (props.height - NATURAL_HEIGHT * scale) / 2 + 'px')
+      : ((props.width - NATURAL_WIDTH * scale) / 2 + 'px, 0');
+
+  return 'translate(' + transform + ') scale(' + scale + ')';
+};
+const CssAnimation = (props : Step & {children: any}) => (
+  <div
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    }}
+    >
+    <div style={{
+      transition: 'transform 1s',
+      transform: `translate(${props.x}px, ${props.y}px) scale(${props.scale})`,
+      transformOrigin: '0 0 0',
+    }}>
+      <div style={{
+        transform: positionCenterItem(props),
+        transformOrigin: '0 0 0',
+      }}>{props.children}</div>
+    </div>
+  </div>
+);
 
 const Position = (props : Step & {children: any}) => (
   <div
@@ -42,15 +79,40 @@ const Position = (props : Step & {children: any}) => (
   </div>
 );
 
+let cachedMap;
+const NATURAL_WIDTH = 400;
+const NATURAL_HEIGHT = 400;
 export default class extends React.Component {
   state = {step: 0};
   steps : Array<Step> = [
-    {width: 2000, height: 2000, x: -250, y: -350, scale: 4},
-    {width: 2000, height: 2000, x: -400, y: -350, scale: 4},
+    {x: 300, y: -30, scale: 0.8},
+    {x: 300, y: -30, scale: 0.8},
+
+    // Mount DOM
+    {x: -1300, y: -1760, scale: 4},
+
+    // iOS Fortress
+    {x: -550, y: -680, scale: 4},
+
+    // Android Forest
+    {x: -3100, y: -1700, scale: 4},
+
+    // UWP
+    {x: -2300, y: -1250, scale: 3.5},
+
+    // Titaniumland
+    {x: -3000, y: -150, scale: 3.5},
+
+    // Blessed Plains
+    {x: -1400, y: -700, scale: 3},
+
+    // Isle of Firmatas
+    {x: -300, y: -1400, scale: 2.5},
+
+    {x: 300, y: -30, scale: 0.8},
   ];
 
   onStep = dir => {
-    console.log('Map.onStep(%s)', dir);
     if (dir === 'RIGHT') {
       const diff = +1;
       if (this.state.step + diff < this.steps.length) {
@@ -67,11 +129,31 @@ export default class extends React.Component {
     return false;
   };
 
+  /*
+  refSetter = node => this.node = node;
+  componentDidMount() {
+    if (!cachedMap) {
+      makeMap(this.node, defaultParams);
+      cachedMap = this.node;
+    }
+  }
+
+  componentDidUpdate() {
+    this.node.appendChild(cachedMap);
+  }
+  */
+
   render () {
+    const map = <Map />; // <svg ref={this.refSetter} width={400} height={400} />
     if (this.state.step === 0) {
       return (
         <FullScreen background={'#ffffff'}>
-          <Position {...this.steps[this.state.step]}><Map /></Position>
+          <Fade duration={2}>
+            <CssAnimation
+              width={this.props.width}
+              height={this.props.height}
+              {...this.steps[this.state.step]}>{map}</CssAnimation>
+          </Fade>
         </FullScreen>
       );
     }
@@ -79,6 +161,15 @@ export default class extends React.Component {
     const prev = this.steps[this.state.step - 1]
     const step = this.steps[this.state.step];
 
+    return (
+      <FullScreen background={'#ffffff'}>
+        <CssAnimation 
+          width={this.props.width}
+          height={this.props.height}
+          {...step}>{map}</CssAnimation>
+      </FullScreen>
+    );
+    /*
     return (
       <FullScreen background={'#ffffff'}>
         <Motion
@@ -91,10 +182,11 @@ export default class extends React.Component {
             height: step.height,
           }}
         >
-          {value => <Position {...value}><Map /></Position>}
+          {value => <Position {...value}>{map}</Position>}
         </Motion>
       </FullScreen>
     );
+    */
   }
 }
 

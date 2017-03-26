@@ -1,8 +1,14 @@
 
-export default `import {Component} from 'react';
+export default `import { Component } from 'react';
 
-type State = {| count : number |};
-type Handlers = {| increment : (event: any) => void |};
+type State = {|
+  count : number,
+|};
+
+type Handlers = {|
+  onClick : (event: any) => void,
+|};
+
 type Props = {|
   initialValue ?: number,
   render : (handlers : H, state : S) => React.Element<*>

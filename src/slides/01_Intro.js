@@ -91,18 +91,6 @@ const Steps = [
     </FullScreen>
   ),
 
-  // 3
-  () => [
-    <Base style={{zIndex: 1}} number={144} />,
-    <FullScreen
-      style={{zIndex: 3}}
-      background={colors.white}>
-      <Fade duration={2}>
-        <Map />
-      </Fade>
-    </FullScreen>
-  ],
-
   /*
   // 4
   () => [
