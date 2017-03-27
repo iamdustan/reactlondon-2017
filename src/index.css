@@ -45,7 +45,12 @@ body {
   stroke-linecap: butt;
 }
 
+.hidden-labels text {
+  transition: opacity 1s;
+  opacity: 0;
+}
+
 .line-no {
-  /* visibility: hidden; */
-  opacity: 0.5;
+  visibility: hidden;
+  /* opacity: 0.5; */
 }

@@ -59,7 +59,9 @@ const HardwareReconciler = ReactFiberReconciler({
     return emptyObject;
   },
 
-  getPublicInstance(instance : Instance | TextInstance) : Instance | TextInstance {
+  getPublicInstance(
+    instance : Instance | TextInstance
+  ) : Instance | TextInstance {
     return instance;
   },
 
@@ -132,7 +134,11 @@ const HardwareReconciler = ReactFiberReconciler({
 
 
 
-  commitTextUpdate(textInstance : TI, oldText : string, newText : string) : void {},
+  commitTextUpdate(
+    textInstance : TI,
+    oldText : string,
+    newText : string
+  ) : void {},
   resetTextContent(instance : I) : void {},
   shouldSetTextContent(props: Props) : boolean {
     return false;
@@ -167,8 +173,14 @@ const HardwareReconciler = ReactFiberReconciler({
     rootContainerInstance : Container,
     hostContext : HostContext,
   ) : null | Array<mixed> {
-    // diffing properties in prepareUpdate allows the reconciler to reuse work
-    return diffProperties(instance, type, oldProps, newProps, rootContainerInstance);
+    // diffing props in prepareUpdate allows the reconciler to reuse work
+    return diffProperties(
+      instance,
+      type,
+      oldProps,
+      newProps,
+      rootContainerInstance
+    );
   },
 });
 
@@ -206,7 +218,10 @@ const HardwareRenderer = {
       });
 
       board.on('error', (error) => console.log('Error!', error));
-      board.on('close', () => console.info('Board in port "%s" closed', container));
+      board.on('close', () => console.info(
+        'Board in port "%s" closed',
+        container
+      ));
     }
   }
 };

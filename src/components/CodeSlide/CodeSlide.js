@@ -48,8 +48,8 @@ const style = {
 };
 
 const defaultStyle = {
-  padding: '5% 15%',
-  fontSize: 24,
+  padding: '5% 10%',
+  fontSize: 32,
   lineHeight: 1.5,
   overflowY: 'auto',
   height: '90%',

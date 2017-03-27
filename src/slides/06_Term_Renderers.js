@@ -11,6 +11,7 @@ import Code from '../components/code';
 import Multislide from '../components/multislide';
 import DomDemo from '../demos/dom';
 
+import DomGif from '../resources/react-dom-counter.gif';
 import NativeGif from '../resources/ato-counter-native.gif';
 import BlessedGif from '../resources/ato-counter-blessed.gif';
 import AframeGif from '../resources/ato-counter-aframe.gif';
@@ -65,14 +66,14 @@ const slides = [
   Pane({/*text: 'CounterDOM', */Comp: () => (
     <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
       <div style={{margin: '0 auto', minWidth: 680}}>
-        <DomDemo />
+        <img src={DomGif} alt={'React DOM Counter'} style={{maxWidth: '100%'}} />
       </div>
     </div>
   )}),
   // () => <FullScreen background={defaultColor}><Code src={CounterSource} /></FullScreen>,
   CodePane({
     text: 'CounterDOM',
-    children: <DomDemo />,
+    image: DomGif,
     code: CounterSource,
   }),
   CodePane({

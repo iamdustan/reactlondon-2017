@@ -40,6 +40,7 @@ const positionCenterItem = (props) => {
 };
 const CssAnimation = (props : Step & {children: any}) => (
   <div
+    className={props.hiddenLabels ? 'hidden-labels' : ''}
     style={{
       position: 'absolute',
       top: 0,
@@ -85,14 +86,15 @@ const NATURAL_HEIGHT = 400;
 export default class extends React.Component {
   state = {step: 0};
   steps : Array<Step> = [
+    {x: 500, y: -30, scale: 0.8, hiddenLabels: true},
+    {x: 500, y: -30, scale: 0.8, hiddenLabels: true},
     // {x: 300, y: -30, scale: 0.8},
     // {x: 300, y: -30, scale: 0.8},
 
     // Mount DOM
     // {x: -1300, y: -1760, scale: 4},
     // {x: -1300, y: -1760, scale: 4},
-    {x: -1700, y: -2960, scale: 4},
-    {x: -1700, y: -2960, scale: 4},
+    {x: -1700, y: -2760, scale: 4},
 
     // iOS Fortress
     // {x: -550, y: -680, scale: 4},
@@ -100,25 +102,25 @@ export default class extends React.Component {
 
     // Android Forest
     // {x: -3100, y: -1700, scale: 4},
-    {x: -5000, y: -2860, scale: 4},
+    {x: -4700, y: -2560, scale: 4},
 
     // UWP
     // {x: -2300, y: -1250, scale: 3.5},
-    {x: -4200, y: -2200, scale: 3.5},
+    {x: -3800, y: -2000, scale: 3.5},
 
     // Titaniumland
     // {x: -3000, y: -150, scale: 3.5},
-    {x: -5050, y: -320, scale: 3.5},
+    {x: -4500, y: -320, scale: 3.5},
 
     // Blessed Plains
     // {x: -1400, y: -700, scale: 3},
-    {x: -3000, y: -1900, scale: 4},
+    {x: -3000, y: -1300, scale: 4},
 
     // Isle of Firmatas
     // {x: -300, y: -1400, scale: 2.5},
-    {x: -500, y: -2490, scale: 2.5},
+    {x: -500, y: -2200, scale: 2.5},
 
-    {x: 300, y: -30, scale: 0.8},
+    {x: 500, y: -30, scale: 0.8},
   ];
 
   onStep = dir => {

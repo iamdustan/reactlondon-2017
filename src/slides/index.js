@@ -21,9 +21,11 @@ import RendererConcepts from './08_RendererConcepts';
 import GuideIntro from './09_Intro';
 import Guide from './09_LetsDoIt';
 import Walkthrough from './10_Code';
+import WeDidIt from './10b_WeDidIt';
 
 import LearnOnce from './11_LearnOnce';
 import RenderEverywhere from './12_RenderEverywhere';
+import ThankYou from './12_RenderEverywhere';
 
 export default [
   Setup,
@@ -47,9 +49,13 @@ export default [
 
   GuideIntro,
   Guide,
+
   Walkthrough,
+  WeDidIt,
 
   LearnOnce,
   RenderEverywhere,
+
+  ThankYou,
 ];
 

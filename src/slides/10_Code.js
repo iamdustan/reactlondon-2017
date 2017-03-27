@@ -17,9 +17,7 @@ class Slide extends React.Component {
 
   onStep = dir => {
     if (this.node) {
-      const result = this.node.onStep(dir);
-      console.log('onStep(%s)', dir, result);
-      return result;
+      return this.node.onStep(dir);
     }
   }
 
@@ -43,41 +41,42 @@ class Slide extends React.Component {
 
             // host context
             { loc: [50, 61] },
-            { loc: [61, 64] },
+            { loc: [61, 66] },
 
             // create instances
-            { loc: [67, 79] },
-            { loc: [67, 89] },
+            { loc: [69, 81] },
+            { loc: [75, 91] },
 
             // finalize initial children
-            { loc: [91, 99] },
+            { loc: [93, 101] },
 
             // append initial child
-            { loc: [100, 106] },
+            { loc: [102, 108] },
 
             // linked list operations
-            { loc: [107, 131] },
+            { loc: [109, 123] },
+            { loc: [124, 133] },
 
             // text updates
-            { loc: [134, 139] },
+            { loc: [136, 145] },
 
             // commit mount
-            { loc: [142, 148] },
+            { loc: [148, 154] },
 
             // commit update
-            { loc: [149, 160] },
+            { loc: [155, 166] },
 
             // prepare update
-            { loc: [161, 172] },
+            { loc: [167, 184] },
 
 
             // devtools integration
-            { loc: [176, 187] },
+            { loc: [188, 199] },
 
             // renderer
-            { loc: [189, 196] },
-            { loc: [196, 210] },
-            { loc: [213, 214] },
+            { loc: [201, 208] },
+            { loc: [208, 225] },
+            { loc: [228, 229] },
           ]}
         />
       </FullScreen>

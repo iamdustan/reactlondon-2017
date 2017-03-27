@@ -13,9 +13,10 @@ class Counter extends Component {
   };
 
   render () {
+    const { component, initialValue, ...props} = this.props;
     return (
-      <this.props.component onClick={this.increment}>
-        Click counter: {this.state.count}
+      <this.props.component {...props} onClick={this.increment}>
+        <span>Click counter</span>: {this.state.count}
       </this.props.component>
     );
   }
@@ -28,8 +29,8 @@ class App extends Component {
       <div className={'Container'} onClick={this.increment}>
         <h2 className={'Header'}>React.js Counter</h2>
         <div>
-          <Counter />
-          <Counter initialValue={5} />
+          <Counter className={'Button'} />
+          <Counter className={'Button'} initialValue={5} />
         </div>
       </div>
     );

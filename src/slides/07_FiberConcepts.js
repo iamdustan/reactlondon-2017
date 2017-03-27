@@ -28,7 +28,7 @@ const Bubble = styled.div`
   height: 6em;
   width: 6em;
   align-items: center;
-  text-align: center;
+  justify-content: center;
 `;
 
 const ArrowContainer = styled.div`
@@ -54,6 +54,38 @@ const textFor = [
   'Scheduling',
   'Unit of Work',
 ];
+
+const ImageLabel = styled.div`
+  color: #000;
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  z-index: 1;
+  text-align: center;
+  transform: translate(-50%, 0);
+  background: #fff;
+  padding: 1.5em;
+`;
+
+const ByLine = styled.div`
+  color: #999;
+  font-size: 32px;
+`;
+
+const ByLink = styled.div`
+  color: #999;
+  font-size: 32px;
+`;
+
+const FullImage = styled.img`
+  position: fixed;
+  top: -100px;
+  left: 0;
+  min-width: 100%;
+  max-width: 102%;
+  min-height: 100%;
+  z-index: 0;
+`;
 
 const TITLE = 'Fiber Concepts';
 const slide = ({color, children}) => () => (
@@ -87,7 +119,7 @@ const steps = [
             <Title style={{fontSize: interpolatingStyle.fontSize}}>{TITLE}</Title>
           </Centered>,
           <BubbleContainer>
-            <Bubble scale={interpolatingStyle.bubbleScale}><span>{textFor[0]}</span></Bubble>
+            <Bubble scale={interpolatingStyle.bubbleScale}>{textFor[0]}</Bubble>
           </BubbleContainer>
         </div>}
       </Motion>
@@ -111,7 +143,7 @@ const steps = [
           <BubbleContainer>
             {interpolatingStyles.map((style, i, all) => [
               (i === 0) ? null : <Arrow key={i + 10} scale={style.scale} />,
-              <Bubble key={i} scale={style.scale}><span>{textFor[i]}</span></Bubble>,
+              <Bubble key={i} scale={style.scale}>{textFor[i]}</Bubble>,
             ])}
           </BubbleContainer>
         }
@@ -136,7 +168,7 @@ const steps = [
           <BubbleContainer>
             {interpolatingStyles.map((style, i, all) => [
               (i === 0) ? null : <Arrow key={i + 10} scale={style.scale} />,
-              <Bubble key={i} scale={style.scale}><span>{textFor[i]}</span></Bubble>,
+              <Bubble key={i} scale={style.scale}>{textFor[i]}</Bubble>,
             ])}
           </BubbleContainer>
         }
@@ -168,14 +200,12 @@ const steps = [
       </StaggeredMotion>,
       <Fade duration={1}>
         <FullScreen background="#fff">
-          <Centered>
-            <img src={CartoonImage} alt="Cartoon intro to Fiber" style={{width: '60%'}}/>
-            <div style={{color: '#000'}}>
+            <FullImage src={CartoonImage} alt="Cartoon intro to Fiber" />
+            <ImageLabel>
               <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
-              https://www.youtube.com/watch?v=ZCuYPiUIONs<span style={{display: 'inline-block', width: '24em'}} />
-              by Lin Clark
-            </div>
-          </Centered>
+              <ByLine>by Lin Clark</ByLine>
+              <ByLink>youtube.com/watch?v=ZCuYPiUIONs</ByLink>
+            </ImageLabel>
         </FullScreen>
       </Fade>
     ],
@@ -185,25 +215,21 @@ const steps = [
     color: colors.black,
     children: [
       <FullScreen background="#fff">
-        <Centered>
-          <img src={CartoonImage} alt="Cartoon intro to Fiber" style={{width: '60%'}}/>
-          <div style={{color: '#000'}}>
-            <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
-            https://www.youtube.com/watch?v=ZCuYPiUIONs<span style={{display: 'inline-block', width: '24em'}} />
-            by Lin Clark
-          </div>
-        </Centered>
+        <FullImage src={CartoonImage} alt="Cartoon intro to Fiber" />
+        <ImageLabel>
+          <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
+          <ByLine>by Lin Clark</ByLine>
+          <ByLink>youtube.com/watch?v=ZCuYPiUIONs</ByLink>
+        </ImageLabel>
       </FullScreen>,
       <Fade duration={1}>
         <FullScreen background="#fff">
-          <Centered>
-            <img src={AcdliteImage} alt="What’s Next For React" style={{width: '60%'}}/>
-            <div style={{color: '#000'}}>
-              <Title style={{fontSize: 72}}>What’s Next For React</Title>
-              https://www.youtube.com/watch?v=aV1271hd9ew<span style={{display: 'inline-block', width: '24em'}} />
-              by Andrew Clark
-            </div>
-          </Centered>
+          <FullImage src={AcdliteImage} alt="What’s Next For React" style={{top: 0}}/>
+          <ImageLabel>
+            <Title style={{fontSize: 72}}>What’s Next For React</Title>
+            <ByLine>by Andrew Clark</ByLine>
+            <ByLink>youtube.com/watch?v=aV1271hd9ew</ByLink>
+          </ImageLabel>
         </FullScreen>
       </Fade>
     ],
