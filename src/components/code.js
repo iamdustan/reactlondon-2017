@@ -6,17 +6,14 @@ import 'prismjs/themes/prism-okaidia.css';
 
 const defaultStyle = {
   padding: '5% 15%',
-  fontSize: 18,
+  fontSize: 24,
+  lineHeight: 1.5,
   overflowY: 'auto',
   height: '90%',
   boxSizing: 'border-box',
 };
 
-class Code extends React.Component {
-  shouldComponentUpdate(nextProps, nextContext) {
-    return nextProps !== this.props;
-  }
-
+class Code extends React.PureComponent {
   render() {
     const {
       src,

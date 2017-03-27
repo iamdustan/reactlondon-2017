@@ -12,7 +12,10 @@ export default (baseProps) => (
   <GenericCounter
     {...baseProps}
     render={(props, state) => (
-      <TouchableHighlight onPress={props.onClick} underlayColor={'transparent'}>
+      <TouchableHighlight
+        onPress={props.onClick}
+        underlayColor={'transparent'}
+      >
         <View style={styles.container}>
           <Text style={baseProps.style}>
             Counter:

@@ -332,7 +332,12 @@ const steps = [
     internalInstanceHandle : OpaqueHandle
   ) : I,
   appendInitialChild(parentInstance : I, child : I | TI) : void,
-  finalizeInitialChildren(parentInstance : I, type : T, props : P, rootContainerInstance : C) : boolean,
+  finalizeInitialChildren(
+    parentInstance : I,
+    type : T,
+    props : P,
+    rootContainerInstance : C
+  ) : boolean,
 
   prepareUpdate(
     instance : I,
@@ -350,7 +355,12 @@ const steps = [
     newProps : P,
     internalInstanceHandle : OpaqueHandle
   ) : void,
-  commitMount(instance : I, type : T, newProps : P, internalInstanceHandle : OpaqueHandle) : void,
+  commitMount(
+    instance : I,
+    type : T,
+    newProps : P,
+    internalInstanceHandle : OpaqueHandle
+  ) : void,
 
   shouldSetTextContent(props : P) : boolean,
   resetTextContent(instance : I) : void,

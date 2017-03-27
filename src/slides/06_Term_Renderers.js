@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import styled from 'styled-components';
 import {
   Centered,
   FullScreen,
@@ -19,6 +20,7 @@ import CounterSource from '../demos/GenericCounter';
 import IOSSource from '../demos/CounterIOS';
 import BlessedSource from '../demos/CounterBlessed';
 import AframeSource from '../demos/CounterAframe';
+import HardwareSource from '../demos/CounterHardware';
 
 const defaultColor = '#000000';
 const Pane = ({color, text, image, video, Comp}) => () => (
@@ -32,19 +34,27 @@ const Pane = ({color, text, image, video, Comp}) => () => (
   </FullScreen>
 );
 
-const CodeTitle = (props) => <div>{props.children}</div>;
+const CodeTitle = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0.5em;
+  background: #fff;
+  color: #000;
+`;
 
-const CodePane = ({color, text, image, video, code}) => () => (
+const CodePane = ({color, text, image, video, code, children}) => () => (
   <FullScreen background={color || defaultColor}>
     {text && <CodeTitle>{text}</CodeTitle>}
-    <div style={{display: 'flex', flexDirection: 'row'}}>
-      <div>
-        {image && <img src={image} alt={text} />}
+    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%'}}>
+      <div style={{flex: '0 0 50%', textAlign: 'center'}}>
+        {children}
+        {image && <img src={image} alt={text} style={{maxWidth: '100%'}} />}
         {video && <video  width="100%" controls>
           <source src={video} type="video/mp4" />
         </video>}
       </div>
-      <div>
+      <div style={{flex: '0 0 50%', height: '100%'}}>
         <Code src={code} />
       </div>
     </div>
@@ -52,8 +62,19 @@ const CodePane = ({color, text, image, video, code}) => () => (
 );
 const slides = [
   Pane({text: 'Renderer'}),
-  Pane({/*text: 'CounterDOM', */Comp: DomDemo}),
-  () => <FullScreen background={defaultColor}><Code src={CounterSource} /></FullScreen>,
+  Pane({/*text: 'CounterDOM', */Comp: () => (
+    <div style={{display: 'flex', alignItems: 'center'}}>
+      <div style={{margin: '0 auto'}}>
+        <DomDemo />
+      </div>
+    </div>
+  )}),
+  // () => <FullScreen background={defaultColor}><Code src={CounterSource} /></FullScreen>,
+  CodePane({
+    text: 'CounterDOM',
+    children: <DomDemo />,
+    code: CounterSource,
+  }),
   CodePane({
     text: 'CounterIOS',
     image: NativeGif,
@@ -70,6 +91,11 @@ const slides = [
     code: AframeSource,
   }),
   Pane({text: 'CounterHardware', video: HardwareVideo}),
+  CodePane({
+    text: 'CounterHardware',
+    video: HardwareVideo,
+    code: HardwareSource,
+  }),
 ];
 
 export default Multislide(slides);

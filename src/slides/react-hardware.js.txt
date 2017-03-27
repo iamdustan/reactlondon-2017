@@ -28,9 +28,17 @@ const IO_KEY = '__IO__';
 const HardwareReconciler = ReactFiberReconciler({
 
   // New Fiber feature. Async Rendering!
-  scheduleAnimationCallback: (fn : Function) => {}, // window.requestAnimationFrame,
-  scheduleDeferredCallback: (fn : (deadline : Deadline) => void) => {}, // window.requestIdleCallback,
   useSyncScheduling: false,
+
+  scheduleAnimationCallback: (fn : Function) => {},
+    // -> window.requestAnimationFrame,
+
+  scheduleDeferredCallback: (fn : (deadline : Deadline) => void) => {},
+    // -> window.requestIdleCallback,
+
+  shouldDeprioritizeSubtree(type : T, props : P) : boolean {
+    return false;
+  },
 
 
 
@@ -40,12 +48,10 @@ const HardwareReconciler = ReactFiberReconciler({
 
 
 
-  // getRootHostContext(rootContainerInstance : C) : CX,
   getRootHostContext(rootContainerInstance : Board) : Board {
     return rootContainerInstance;
   },
 
-  // getChildHostContext(parentHostContext : CX, type : T) : CX,
   getChildHostContext(
     parentHostContext : string | null,
     type : string
@@ -83,7 +89,6 @@ const HardwareReconciler = ReactFiberReconciler({
 
 
 
-
   finalizeInitialChildren(
     element : Instance,
     type : string,
@@ -100,8 +105,6 @@ const HardwareReconciler = ReactFiberReconciler({
     setPayloadForPin(parentInstance, child);
   },
 
-
-
   appendChild(
     parentInstance: Instance | Container,
     child: Instance | TextInstance
@@ -114,10 +117,13 @@ const HardwareReconciler = ReactFiberReconciler({
     child : Instance | TextInstance,
     beforeChild : Instance |  TextInstance
   ) {
-    // noop. Hardware pins aren’t actually modeled as a tree.
+    // noop. Hardware pins aren't actually modeled as a tree.
   },
 
-  removeChild(parentInstance : Instance | Container, child : Instance | TextInstance) : void {
+  removeChild(
+    parentInstance : Instance | Container,
+    child : Instance | TextInstance
+  ) : void {
     setPayloadForPin(
       parentInstance,
       Object.assign({}, child, {value: 0})
@@ -134,18 +140,12 @@ const HardwareReconciler = ReactFiberReconciler({
 
 
 
-
-  prepareUpdate(
+  commitMount(
     instance : Instance,
     type : string,
-    oldProps : Props,
     newProps : Props,
-    rootContainerInstance : Container,
-    hostContext : HostContext,
-  ) : null | Array<mixed> {
-    // diffing properties in prepareUpdate allows the reconciler to reuse work
-    return diffProperties(instance, type, oldProps, newProps, rootContainerInstance);
-  },
+    internalInstanceHandle : OpaqueHandle
+  ) : void {},
 
   commitUpdate(
     instance : Instance,
@@ -159,16 +159,16 @@ const HardwareReconciler = ReactFiberReconciler({
     instance.props = newProps;
   },
 
-  commitMount(
+  prepareUpdate(
     instance : Instance,
     type : string,
+    oldProps : Props,
     newProps : Props,
-    internalInstanceHandle : OpaqueHandle
-  ) : void {},
-
-
-  shouldDeprioritizeSubtree(type : T, props : P) : boolean {
-    return false;
+    rootContainerInstance : Container,
+    hostContext : HostContext,
+  ) : null | Array<mixed> {
+    // diffing properties in prepareUpdate allows the reconciler to reuse work
+    return diffProperties(instance, type, oldProps, newProps, rootContainerInstance);
   },
 });
 
@@ -178,7 +178,10 @@ const HardwareReconciler = ReactFiberReconciler({
 
 if (typeof injectInternals === 'function') {
   injectInternals({
-    findFiberByHostInstance: () => null, // ReactHardwareComponentTree.getClosestInstanceFromNode,
+    findFiberByHostInstance: (
+      () => {} ||
+      ReactHardwareComponentTree.getClosestInstanceFromNode
+    ),
     findHostInstanceByFiber: HardwareReconciler.findHostInstance,
   });
 }

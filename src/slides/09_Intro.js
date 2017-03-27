@@ -15,7 +15,7 @@ const Faded = styled.div`
 export default () => <FullScreen color="#000">
   <Centered>
     <Title style={{fontSize: 96, lineHeight: 1.2, textAlign: 'left', padding: '0 15%'}}>
-      <Faded>
+      <Faded style={{textDecoration: 'line-through'}}>
         Terminology<br />
         Fiber Concepts<br />
         Renderer Concepts

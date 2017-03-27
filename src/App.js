@@ -41,7 +41,7 @@ class App extends Component {
     setTimeout(() => {
       var slide = 0;
       if (location.hash) {
-        slide = parseInt(location.hash.replace('#', ''), 10);
+        slide = parseInt(location.hash.replace('#', ''), 10) || 0;
       }
       this.setState(state => ({slide}));
       this.setDims();

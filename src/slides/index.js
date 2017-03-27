@@ -10,6 +10,7 @@ import Outline from './05_Outline';
 
 import TermsIntro from './06_Intro';
 import TermsRenderers from './06_Term_Renderers';
+import TermsOther from './06_Term_Other';
 
 import FiberIntro from './07_FiberIntro';
 import FiberConcepts from './07_FiberConcepts';
@@ -36,6 +37,7 @@ export default [
 
   TermsIntro,
   TermsRenderers,
+  TermsOther,
 
   FiberIntro,
   FiberConcepts,

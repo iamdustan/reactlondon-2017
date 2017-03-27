@@ -8,6 +8,10 @@ body {
   color: #fff;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .field,
 .coast,
 .river,
@@ -41,3 +45,7 @@ body {
   stroke-linecap: butt;
 }
 
+.line-no {
+  /* visibility: hidden; */
+  opacity: 0.5;
+}
