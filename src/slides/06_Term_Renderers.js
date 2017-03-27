@@ -50,12 +50,12 @@ const CodePane = ({color, text, image, video, code, children}) => () => (
       <div style={{flex: '0 0 50%', textAlign: 'center'}}>
         {children}
         {image && <img src={image} alt={text} style={{maxWidth: '100%'}} />}
-        {video && <video  width="100%" controls>
+        {video && <video  width="100%" autoPlay>
           <source src={video} type="video/mp4" />
         </video>}
       </div>
       <div style={{flex: '0 0 50%', height: '100%'}}>
-        <Code src={code} style={{paddingLeft: 0, paddingRight: 0}} />
+        <Code src={code} style={{paddingLeft: '1.5em', paddingRight: 0}} />
       </div>
     </div>
   </FullScreen>
@@ -64,7 +64,7 @@ const slides = [
   Pane({text: 'Renderer'}),
   Pane({/*text: 'CounterDOM', */Comp: () => (
     <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
-      <div style={{margin: '0 auto'}}>
+      <div style={{margin: '0 auto', minWidth: 680}}>
         <DomDemo />
       </div>
     </div>

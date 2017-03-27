@@ -21,13 +21,14 @@ const Bubble = styled.div`
   color: #000;
   background: #fff;
   border-radius: 50%;
-  display: inline-block;
-  line-height: 6;
+  display: inline-flex;
   font-size: 36px;
   font-weight: bold;
   ${props => typeof props.scale !== 'undefined' ? `transform: scale(${props.scale});` : ''}
   height: 6em;
   width: 6em;
+  align-items: center;
+  text-align: center;
 `;
 
 const ArrowContainer = styled.div`
@@ -86,7 +87,7 @@ const steps = [
             <Title style={{fontSize: interpolatingStyle.fontSize}}>{TITLE}</Title>
           </Centered>,
           <BubbleContainer>
-            <Bubble scale={interpolatingStyle.bubbleScale}>{textFor[0]}</Bubble>
+            <Bubble scale={interpolatingStyle.bubbleScale}><span>{textFor[0]}</span></Bubble>
           </BubbleContainer>
         </div>}
       </Motion>
@@ -110,7 +111,7 @@ const steps = [
           <BubbleContainer>
             {interpolatingStyles.map((style, i, all) => [
               (i === 0) ? null : <Arrow key={i + 10} scale={style.scale} />,
-              <Bubble key={i} scale={style.scale}>{textFor[i]}</Bubble>,
+              <Bubble key={i} scale={style.scale}><span>{textFor[i]}</span></Bubble>,
             ])}
           </BubbleContainer>
         }
@@ -135,7 +136,7 @@ const steps = [
           <BubbleContainer>
             {interpolatingStyles.map((style, i, all) => [
               (i === 0) ? null : <Arrow key={i + 10} scale={style.scale} />,
-              <Bubble key={i} scale={style.scale}>{textFor[i]}</Bubble>,
+              <Bubble key={i} scale={style.scale}><span>{textFor[i]}</span></Bubble>,
             ])}
           </BubbleContainer>
         }

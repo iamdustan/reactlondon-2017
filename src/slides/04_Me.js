@@ -67,11 +67,11 @@ const slides = [
       </Centered>
     </FullScreen>,
     <Fade duration={1}>
-      <FullScreen background="#fff">
-        <Centered>
-          <video width="100%" autoPlay>
+      <FullScreen background="#fff" style={{backgroundColor: 'transparent'}}>
+        <Centered style={{backgroundColor: 'transparent'}}>
+          <video width="100%" preload autoPlay style={{backgroundColor: 'transparent'}}>
             <source src={WebflowOgg} type="video/ogg" />
-            <source src={WebflowMov} type="video/mov" />
+            <source src={WebflowMov} type="video/quicktime" style={{backgroundColor: 'transparent'}} />
           </video>
         </Centered>
       </FullScreen>

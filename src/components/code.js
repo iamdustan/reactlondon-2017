@@ -6,7 +6,7 @@ import 'prismjs/themes/prism-okaidia.css';
 
 const defaultStyle = {
   padding: '5% 15%',
-  fontSize: 24,
+  fontSize: 32,
   lineHeight: 1.5,
   overflowY: 'auto',
   height: '90%',

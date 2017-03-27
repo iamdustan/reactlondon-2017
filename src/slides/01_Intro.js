@@ -55,7 +55,7 @@ const Four = styled.span`
   width: 300px;
   position: absolute;
   left: 390px;
-  top: 0px;
+  top: -30px;
 `;
 
 const ReactImage = (props) => (
