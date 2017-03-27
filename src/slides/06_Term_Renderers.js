@@ -55,7 +55,7 @@ const CodePane = ({color, text, image, video, code, children}) => () => (
         </video>}
       </div>
       <div style={{flex: '0 0 50%', height: '100%'}}>
-        <Code src={code} />
+        <Code src={code} style={{paddingLeft: 0, paddingRight: 0}} />
       </div>
     </div>
   </FullScreen>
@@ -63,7 +63,7 @@ const CodePane = ({color, text, image, video, code, children}) => () => (
 const slides = [
   Pane({text: 'Renderer'}),
   Pane({/*text: 'CounterDOM', */Comp: () => (
-    <div style={{display: 'flex', alignItems: 'center'}}>
+    <div style={{display: 'flex', alignItems: 'center', height: '100%'}}>
       <div style={{margin: '0 auto'}}>
         <DomDemo />
       </div>
@@ -90,7 +90,7 @@ const slides = [
     image: AframeGif,
     code: AframeSource,
   }),
-  Pane({text: 'CounterHardware', video: HardwareVideo}),
+  // Pane({text: 'CounterHardware', video: HardwareVideo}),
   CodePane({
     text: 'CounterHardware',
     video: HardwareVideo,

@@ -85,29 +85,38 @@ const NATURAL_HEIGHT = 400;
 export default class extends React.Component {
   state = {step: 0};
   steps : Array<Step> = [
-    {x: 300, y: -30, scale: 0.8},
-    {x: 300, y: -30, scale: 0.8},
+    // {x: 300, y: -30, scale: 0.8},
+    // {x: 300, y: -30, scale: 0.8},
 
     // Mount DOM
     {x: -1300, y: -1760, scale: 4},
+    {x: -1300, y: -1760, scale: 4},
+    // {x: -1700, y: -2960, scale: 4},
+    // {x: -1700, y: -2960, scale: 4},
 
     // iOS Fortress
     {x: -550, y: -680, scale: 4},
+    // {x: -850, y: -1080, scale: 4},
 
     // Android Forest
     {x: -3100, y: -1700, scale: 4},
+    // {x: -5000, y: -2860, scale: 4},
 
     // UWP
     {x: -2300, y: -1250, scale: 3.5},
+    // {x: -4200, y: -2200, scale: 3.5},
 
     // Titaniumland
     {x: -3000, y: -150, scale: 3.5},
+    // {x: -5050, y: -320, scale: 3.5},
 
     // Blessed Plains
     {x: -1400, y: -700, scale: 3},
+    // {x: -3000, y: -1900, scale: 4},
 
     // Isle of Firmatas
     {x: -300, y: -1400, scale: 2.5},
+    // {x: -500, y: -2490, scale: 2.5},
 
     {x: 300, y: -30, scale: 0.8},
   ];
