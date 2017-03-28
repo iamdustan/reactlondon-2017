@@ -5,7 +5,7 @@ import Intro from './01_Intro';
 import Map from './02_Map';
 import Today from './03_Today';
 import Sunil from './04a_Sunil';
-import Me from './04_Me';
+import Me from './04_Me2';
 import Outline from './05_Outline';
 
 import TermsIntro from './06_Intro';

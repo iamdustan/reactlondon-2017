@@ -30,7 +30,7 @@ export default (steps, background) => {
       const Step = steps[this.state.step];
 
       return <FullScreen background={background || "#6b0e6b"}>
-        <Step onRest={this.next} />
+        <Step onRest={this.next} {...this.props} />
       </FullScreen>;
     }
   }
