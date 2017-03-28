@@ -20,6 +20,7 @@ import AframeGif from '../resources/ato-counter-aframe.gif';
 import HardwareVideo from '../resources/react-hardware.mp4';
 
 import CounterSource from '../demos/GenericCounter';
+import DomSource from '../demos/CounterDOM';
 import IOSSource from '../demos/CounterIOS';
 import BlessedSource from '../demos/CounterBlessed';
 import AframeSource from '../demos/CounterAframe';
@@ -105,14 +106,18 @@ const slides = [
     text: 'CounterDOM',
     image: DomGif,
     code: CounterSource,
-    ranges: [{ loc: [0, 11] }],
   }),
   CodePane({
     text: 'CounterDOM',
     image: DomGif,
     code: CounterSource,
     scrollTop: 760,
-    ranges: [{ loc: [11, 25] }],
+  }),
+  CodePane({
+    text: 'CounterDOM',
+    image: DomGif,
+    code: DomSource,
+    scrollTop: 760,
   }),
   CodePane({
     text: 'CounterIOS',
