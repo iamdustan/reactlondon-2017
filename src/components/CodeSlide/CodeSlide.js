@@ -174,6 +174,7 @@ class CodeSlide extends React.Component {
     const range = ranges[active] || {};
     const loc = range.loc || [];
     const slideBg = bgColor || defaultBgColor;
+    console.log(ranges);
 
     style.color = color || style.color;
 

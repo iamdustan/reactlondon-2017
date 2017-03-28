@@ -38,7 +38,7 @@ const positionCenterItem = (props) => {
 
   return 'translate(' + transform + ') scale(' + scale + ')';
 };
-const CssAnimation = (props : Step & {children: any}) => (
+export const CssAnimation = (props : Step & {children: any}) => (
   <div
     className={props.hiddenLabels ? 'hidden-labels' : ''}
     style={{

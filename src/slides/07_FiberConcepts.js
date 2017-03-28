@@ -14,7 +14,8 @@ import {
 import {colors} from '../components/theme';
 import Multislide from '../components/multislide';
 
-import CartoonImage from '../resources/cartoon-intro.png';
+// import CartoonImage from '../resources/cartoon-intro.png';
+import CartoonImage from '../resources/cartoon.png';
 import AcdliteImage from '../resources/acdlite.png';
 
 const Bubble = styled.div`
@@ -59,7 +60,7 @@ const ImageLabel = styled.div`
   color: #000;
   position: absolute;
   left: 50%;
-  bottom: 10%;
+  bottom: 0;
   z-index: 1;
   text-align: center;
   transform: translate(-50%, 0);
@@ -202,7 +203,7 @@ const steps = [
         <FullScreen background="#fff">
             <FullImage src={CartoonImage} alt="Cartoon intro to Fiber" />
             <ImageLabel>
-              <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
+              {/*<Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>*/}
               <ByLine>by Lin Clark</ByLine>
               <ByLink>youtube.com/watch?v=ZCuYPiUIONs</ByLink>
             </ImageLabel>
@@ -217,7 +218,7 @@ const steps = [
       <FullScreen background="#fff">
         <FullImage src={CartoonImage} alt="Cartoon intro to Fiber" />
         <ImageLabel>
-          <Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>
+          {/*<Title style={{fontSize: 72}}>A Cartoon Intro To Fiber</Title>*/}
           <ByLine>by Lin Clark</ByLine>
           <ByLink>youtube.com/watch?v=ZCuYPiUIONs</ByLink>
         </ImageLabel>
@@ -225,9 +226,17 @@ const steps = [
       <Fade duration={1}>
         <FullScreen background="#fff">
           <FullImage src={AcdliteImage} alt="What’s Next For React" style={{top: 0}}/>
+          <div style={{
+            background: '#3a1856',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: 222,
+            width: 1410,
+          }} />
           <ImageLabel>
-            <Title style={{fontSize: 72}}>What’s Next For React</Title>
-            <ByLine>by Andrew Clark</ByLine>
+            {/*<Title style={{fontSize: 72}}>What’s Next For React</Title>*/}
+            {/*<ByLine>by Andrew Clark</ByLine>*/}
             <ByLink>youtube.com/watch?v=aV1271hd9ew</ByLink>
           </ImageLabel>
         </FullScreen>

@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import styled from 'styled-components';
 import {
   Centered,
@@ -8,6 +9,7 @@ import {
   Title,
 } from '../components';
 import Code from '../components/code';
+import CodeSlide from '../components/CodeSlide';
 import Multislide from '../components/multislide';
 import DomDemo from '../demos/dom';
 
@@ -44,7 +46,16 @@ const CodeTitle = styled.div`
   color: #000;
 `;
 
-const CodePane = ({color, text, image, video, code, children}) => () => (
+const CodePane = ({
+  color,
+  text,
+  image,
+  video,
+  code,
+  children,
+  scrollTop,
+  ranges,
+}) => () => (
   <FullScreen background={color || defaultColor}>
     {text && <CodeTitle>{text}</CodeTitle>}
     <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', height: '100%'}}>
@@ -56,7 +67,26 @@ const CodePane = ({color, text, image, video, code, children}) => () => (
         </video>}
       </div>
       <div style={{flex: '0 0 50%', height: '100%'}}>
-        <Code src={code} style={{paddingLeft: '1.5em', paddingRight: 0}} />
+        <Code
+          ref={node => {
+            if (node && scrollTop) {
+              const element = findDOMNode(node);
+              element.scrollTop = scrollTop;
+            }
+          }}
+          src={code}
+          style={{paddingLeft: '1.5em', paddingRight: 0}}
+          language="javascript"
+        />
+
+        {/*
+          <CodeSlide
+            code={code}
+            style={{paddingLeft: '1.5em', paddingRight: 0}}
+            lang="javascript"
+            ranges={ranges}
+          />
+        */}
       </div>
     </div>
   </FullScreen>
@@ -75,16 +105,26 @@ const slides = [
     text: 'CounterDOM',
     image: DomGif,
     code: CounterSource,
+    ranges: [{ loc: [0, 11] }],
+  }),
+  CodePane({
+    text: 'CounterDOM',
+    image: DomGif,
+    code: CounterSource,
+    scrollTop: 760,
+    ranges: [{ loc: [11, 25] }],
   }),
   CodePane({
     text: 'CounterIOS',
     image: NativeGif,
     code: IOSSource,
+    scrollTop: 460,
   }),
   CodePane({
     text: 'CounterBlessed',
     image: BlessedGif,
     code: BlessedSource,
+    scrollTop: 260,
   }),
   CodePane({
     text: 'CounterAframe',

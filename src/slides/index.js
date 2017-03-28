@@ -25,14 +25,14 @@ import WeDidIt from './10b_WeDidIt';
 
 import LearnOnce from './11_LearnOnce';
 import RenderEverywhere from './12_RenderEverywhere';
-import ThankYou from './12_RenderEverywhere';
+import ThankYou from './13_ThankYou';
 
 export default [
   Setup,
   Intro,
   Map,
-  Today,
   Sunil,
+  Today,
   Me,
 
   Outline,
